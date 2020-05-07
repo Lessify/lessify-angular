@@ -1,0 +1,10 @@
+{
+  "name": "@lessify/angular-core",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": ">=8.0.0",
+    "@angular/core": ">=8.0.0",
+    "tslib": "^1.10.0",
+    "rxjs": ">=6.3.0"
+  }
+}
