@@ -1,6 +1,9 @@
 {
   "name": "@lessify/angular-core",
+  "description": "",
+  "author": "Lessify",
   "version": "0.0.1",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
     "@angular/core": ">=8.0.0",
