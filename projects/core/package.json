@@ -4,6 +4,14 @@
   "author": "Lessify",
   "version": "0.0.1",
   "license": "MIT",
+  "homepage": "https://github.com/Lessify/lessify-angular",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lessify/lessify-angular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lessify/lessify-angular/issues"
+  },
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
     "@angular/core": ">=8.0.0",
