@@ -29,8 +29,19 @@ export class ConfigurationV1Service extends BaseService {
    *   "number": 1
    * }
    */
-  get(): Observable<LessifyConfiguration> {
-    return this.httpClient.get<LessifyConfiguration>(
+  get<T>(): Observable<T>;
+  /**
+   * get Configurations
+   * examples:
+   * {
+   *   "boolean": true,
+   *   "date": "2020-02-20",
+   *   "text": "any value",
+   *   "number": 1
+   * }
+   */
+  get(): Observable<any> {
+    return this.httpClient.get(
         `${this.getRootUrl()}/v1/spaces/${this.config.spaceId}/environments/${this.config.environment}/configurations.json`,
         {
           headers: this.getHeaders()
