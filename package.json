@@ -1,6 +1,6 @@
 {
   "name": "@lessify/angular-core",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

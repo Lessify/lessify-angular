@@ -6,6 +6,15 @@ export abstract class BaseService {
   constructor(
       protected readonly config: SpaceConfig
   ) {
+    if (this.config.spaceId == null || this.config.spaceId === '') {
+      throw new Error('Lessify Configuration Space can\'t be empty');
+    }
+    if (this.config.environment == null || this.config.environment === '') {
+      throw new Error('Lessify Configuration Environment can\'t be empty');
+    }
+    if (this.config.apiKey == null || this.config.apiKey === '') {
+      throw new Error('Lessify Configuration API Key can\'t be empty');
+    }
   }
 
   getRootUrl(): string {
@@ -16,5 +25,13 @@ export abstract class BaseService {
     return new HttpHeaders({
       Authorization: `Bearer ${this.config.apiKey}`
     });
+  }
+
+  getSpace(): string {
+    return this.config.spaceId;
+  }
+
+  getEnvironment(): string {
+    return this.config.environment;
   }
 }

@@ -42,7 +42,7 @@ export class ConfigurationV1Service extends BaseService {
    */
   get(): Observable<any> {
     return this.httpClient.get(
-        `${this.getRootUrl()}/v1/spaces/${this.config.spaceId}/environments/${this.config.environment}/configurations.json`,
+        `${this.getRootUrl()}/v1/spaces/${this.getSpace()}/environments/${this.getEnvironment()}/configurations.json`,
         {
           headers: this.getHeaders()
         }

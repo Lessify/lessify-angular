@@ -71,7 +71,7 @@ export class TranslationV1Service extends BaseService {
    */
   get(locale: string = 'default'): Observable<any> {
     return this.httpClient.get(
-        `${this.getRootUrl()}/v1/spaces/${this.config.spaceId}/environments/${this.config.environment}/translations.${locale}.json`,
+        `${this.getRootUrl()}/v1/spaces/${this.getSpace()}/environments/${this.getEnvironment()}/translations.${locale}.json`,
         {
           headers: this.getHeaders()
         }
