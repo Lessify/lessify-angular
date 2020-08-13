@@ -52,3 +52,10 @@ export function HttpLoaderFactory(service: TranslationV1Service) {
 export class AppModule { }
 ```
 
+## Testing
+In your project, link the @lessify/angular-core we just built:
+
+``npm link $PATH_TO_PROJECT``
+
+Replace **$PATH_TO_PROJECT** with the path to the **@lessify/angular-core** project’s root.
+Note that users will install instead of linking, this is just to iterate faster locally while developing.

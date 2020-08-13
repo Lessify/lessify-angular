@@ -3,14 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {SpaceConfig} from '../core.module';
 import {BaseService} from '../base.service';
 import {Observable} from 'rxjs';
-import {LessifyConfiguration} from './configuration-v1.service';
 
 export interface LessifyTranslation {
-  [key: string]: string ;
-}
-
-export interface LessifyMultiLocaleTranslation {
-  [locale: string]: { [key: string]: string };
+  [key: string]: string | string[];
 }
 
 @Injectable({
@@ -39,38 +34,8 @@ export class TranslationV1Service extends BaseService {
    *   }
    * }
    */
-  get(locale: 'all'): Observable<LessifyMultiLocaleTranslation>;
-  /**
-   * get Translation, possible values:
-   * - 'default': provide default values
-   * - locale: specific locale id from space
-   * - 'all': in one call you will receive all locales in next format
-   * {
-   *   'en': {
-   *     'key1': 'value1'
-   *   },
-   *   'de': {
-   *     'key1': 'value1'
-   *   }
-   * }
-   */
-  get(locale: string): Observable<LessifyTranslation>;
-  /**
-   * get Translation, possible values:
-   * - 'default': provide default values
-   * - locale: specific locale id from space
-   * - 'all': in one call you will receive all locales in next format
-   * {
-   *   'en': {
-   *     'key1': 'value1'
-   *   },
-   *   'de': {
-   *     'key1': 'value1'
-   *   }
-   * }
-   */
-  get(locale: string = 'default'): Observable<any> {
-    return this.httpClient.get(
+  get(locale: string = 'default'): Observable<LessifyTranslation> {
+    return this.httpClient.get<LessifyTranslation>(
         `${this.getRootUrl()}/v1/spaces/${this.getSpace()}/environments/${this.getEnvironment()}/translations.${locale}.json`,
         {
           headers: this.getHeaders()
