@@ -1,0 +1,25 @@
+{
+  "name": "@lessify/angular-tools",
+  "description": "",
+  "author": "Lessify",
+  "version": "0.0.2",
+  "license": "MIT",
+  "homepage": "https://github.com/Lessify/lessify-angular",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lessify/lessify-angular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lessify/lessify-angular/issues"
+  },
+  "schematics": "./src/lib/collection.json",
+  "peerDependencies": {
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "tslib": "^1.10.0"
+  },
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

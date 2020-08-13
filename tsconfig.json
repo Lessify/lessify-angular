@@ -19,6 +19,10 @@
       "core": [
         "dist/core/core",
         "dist/core"
+      ],
+      "tools": [
+        "dist/tools/tools",
+        "dist/tools"
       ]
     }
   },

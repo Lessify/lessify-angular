@@ -3,9 +3,10 @@
   "version": "0.0.10",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "build:prod": "ng build --prod",
+    "build:core": "ng build core",
+    "build:core-prod": "ng build core --prod",
+    "build:tools": "ng build tools",
+    "build:tools-prod": "ng build tools --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

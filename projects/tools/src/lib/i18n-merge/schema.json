@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "@treiq/ngx-tools/i18n-merge",
+  "title": "i18n merge options schema",
+  "description": "merge i18n files in one",
+  "type": "object",
+  "properties": {
+    "cwd": {
+      "type": "string",
+      "description": "The current working directory in which to search. Defaults : './src/app/'",
+      "format": "path"
+    },
+    "pattern": {
+      "type": "string",
+      "description": "File pattern selection. Defaults : '.i18n.json$'",
+      "alias": "p"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output file path that will contain all merged value. Default: './src/assets/i18n/en.json'",
+      "format": "path",
+      "alias": "o"
+    }
+  },
+  "additionalProperties": false
+}
