@@ -4,9 +4,9 @@ This library is library for integration of your Angular project with [Lessify](h
 
 ## NGX-Translate Integration
 
-You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyTranslateV1HttpLoader`.
+You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyNgxTranslateV1HttpLoader`.
 
-Here is how you would use the `LessifyTranslateV1HttpLoader` to load translations from Lessify API:
+Here is how you would use the `LessifyNgxTranslateV1HttpLoader` to load translations from Lessify API:
 
 ```ts
 import {NgModule} from '@angular/core';
@@ -21,8 +21,8 @@ import {
 import {AppComponent} from './app'; 
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(service: TranslationV1Service) {
-    return new LessifyTranslateV1HttpLoader(service);
+export function NgxTranslateHttpLoaderFactory(service: TranslationV1Service) {
+    return new LessifyNgxTranslateV1HttpLoader(service);
 }
 
 @NgModule({
@@ -41,7 +41,7 @@ export function HttpLoaderFactory(service: TranslationV1Service) {
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
+                useFactory: NgxTranslateHttpLoaderFactory,
                 deps: [TranslationV1Service]
             },
             defaultLanguage: 'en'
@@ -50,6 +50,77 @@ export function HttpLoaderFactory(service: TranslationV1Service) {
     bootstrap: [AppComponent]
 })
 export class AppModule { }
+```
+
+## ngneat Transloco Integration
+
+You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyTranslocoV1HttpLoader`.
+
+Here is how you would use the `LessifyTranslocoV1HttpLoader` to load translations from Lessify API:
+
+```ts
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HttpClientModule} from '@angular/common/http';
+import {LoginComponent} from './login/login.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SharedModule} from './shared/shared.module';
+import {
+  LessifyCoreModule,
+  LessifyTranslocoV1HttpLoader,
+  TranslationV1Service
+} from '@lessify/angular-core';
+import {TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, TranslocoModule} from '@ngneat/transloco';
+
+// AoT requires an exported function for factories
+export function TranslocoHttpLoaderFactory(service: TranslationV1Service) {
+  return new LessifyTranslocoV1HttpLoader(service);
+}
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+    LessifyCoreModule.forRoot(
+        {
+          space: {
+            spaceId: 'your-space-id',
+            environment: 'master',
+            apiKey: 'your-api-key'
+          }
+        }
+    ),
+  ],
+  providers: [
+    {
+      provide: TRANSLOCO_CONFIG,
+      useValue: translocoConfig({
+        defaultLang: 'en',
+        availableLangs: ['en', 'de'],
+        flatten: {
+          aot: true
+        },
+        // Remove this option if your application
+        // doesn't support changing language in runtime.
+        reRenderOnLangChange: true,
+        prodMode: false,
+      })
+    },
+    { provide: TRANSLOCO_LOADER, useFactory: TranslocoHttpLoaderFactory, deps: [TranslationV1Service]}
+  ],
+  declarations: [
+    AppComponent,
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
 ```
 
 ## Testing

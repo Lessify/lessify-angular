@@ -15,7 +15,6 @@ export class SpaceConfig {
   beta?: boolean;
 }
 
-
 @NgModule({
   declarations: [],
   imports: [CommonModule, HttpClientModule],
