@@ -1,8 +1,8 @@
-import {TranslateLoader} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 import {TranslationV1Service} from './translation-v1.service';
+import {Translation, TranslocoLoader} from '@ngneat/transloco';
 
-export class LessifyNgxTranslateV1HttpLoader implements TranslateLoader {
+export class LessifyTranslocoV1HttpLoader implements TranslocoLoader {
   constructor(
       private translationService: TranslationV1Service
   ) {
@@ -11,7 +11,7 @@ export class LessifyNgxTranslateV1HttpLoader implements TranslateLoader {
   /**
    * Gets the translations from the server
    */
-  public getTranslation(lang: string): Observable<any> {
+  public getTranslation(lang: string): Observable<Translation> {
     return this.translationService.get(lang);
   }
 }
