@@ -3,3 +3,4 @@
  */
 
 export * from './lib/i18n-merge';
+export * from './config/config';
