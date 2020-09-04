@@ -13,12 +13,23 @@ Example : ``ng generate @lessify/angular-tools:i18n-merge`` or alias ``ng g @les
 ### i18n-merge
 Merge i18n JSON files in one.
 `ng g @lessify/angular-tools:i18n-merge`
-#### Arguments
+#### Configuration File
+
+Tool Configuration file should be located in project root with name **lessify.json**.
+
 | Name          	| Description                                   	| Default value |
 |-----------------	|--------------------------------------------------	|--------------------------------|
-| cwd           	| The current working directory in which to search. |./src/app/|
-| pattern       	| File pattern selection.                           |.i18n.json$|
-| output         	| Output file path that will contain all merged value.|./src/assets/i18n/en.json|
+| cwd           	| The current working directory in which to search. |'./src/app'|
+| languages       	| Project languages.                                |['en']|
+| output         	| Output folder path that will contain all merged value.|'./src/assets/i18n'|
+
+````json
+{
+    cwd: './src/app',
+    output: './src/assets/i18n',
+    languages: ['en']
+}
+````
 
 ## Testing
 In your project, link the @lessify/angular-tools we just built:
