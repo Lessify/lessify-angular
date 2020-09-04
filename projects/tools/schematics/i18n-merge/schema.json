@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "@treiq/ngx-tools/i18n-merge",
+  "id": "@lessify/angular-tools/i18n-merge",
   "title": "i18n merge options schema",
   "description": "merge i18n files in one",
   "type": "object",

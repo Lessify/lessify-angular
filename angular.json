@@ -84,7 +84,7 @@
       }
     }
   },
-  "defaultProject": "core",
+  "defaultProject": "tools",
   "cli": {
     "analytics": false
   }

@@ -15,3 +15,4 @@ Support next implementations :
 `npm init --scope=lessify`
 `npm run build:prod`
 `npm publish --access public dist\core`
+`npm publish --access public dist\tools`

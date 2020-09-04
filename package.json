@@ -6,7 +6,8 @@
     "build:core": "ng build core",
     "build:core-prod": "ng build core --prod",
     "build:tools": "ng build tools",
-    "build:tools-prod": "ng build tools --prod",
+    "build:tools-prod": "ng build tools --prod && npm run build:tools-schematics",
+    "build:tools-schematics": "npm run build:schematics --prefix ./projects/tools",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
