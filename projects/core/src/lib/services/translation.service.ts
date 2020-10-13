@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SpaceConfig} from '../core.module';
-import {BaseService} from '../base.service';
 import {Observable} from 'rxjs';
+import {BaseService} from './base.service';
 
-export interface LessifyTranslation {
-  [key: string]: string | string[];
+export interface Messages {
+  [key: string]: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class TranslationV1Service extends BaseService {
+export class TranslationService extends BaseService {
 
   constructor(
       readonly httpClient: HttpClient,
@@ -34,8 +34,8 @@ export class TranslationV1Service extends BaseService {
    *   }
    * }
    */
-  get(locale: string = 'default'): Observable<LessifyTranslation> {
-    return this.httpClient.get<LessifyTranslation>(
+  get(locale: string = 'default'): Observable<Messages> {
+    return this.httpClient.get<Messages>(
         `${this.getRootUrl()}/v1/spaces/${this.getSpace()}/environments/${this.getEnvironment()}/translations.${locale}.json`,
         {
           headers: this.getHeaders()

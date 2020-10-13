@@ -16,12 +16,12 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {
   LessifyCoreModule,
   LessifyTranslateV1HttpLoader,
-  TranslationV1Service
+  TranslationService
 } from '@lessify/angular-core';
 import {AppComponent} from './app'; 
 
 // AoT requires an exported function for factories
-export function NgxTranslateHttpLoaderFactory(service: TranslationV1Service) {
+export function NgxTranslateHttpLoaderFactory(service: TranslationService) {
     return new LessifyNgxTranslateV1HttpLoader(service);
 }
 
@@ -42,7 +42,7 @@ export function NgxTranslateHttpLoaderFactory(service: TranslationV1Service) {
             loader: {
                 provide: TranslateLoader,
                 useFactory: NgxTranslateHttpLoaderFactory,
-                deps: [TranslationV1Service]
+                deps: [TranslationService]
             },
             defaultLanguage: 'en'
         })
@@ -71,12 +71,12 @@ import {SharedModule} from './shared/shared.module';
 import {
   LessifyCoreModule,
   LessifyTranslocoV1HttpLoader,
-  TranslationV1Service
+  TranslationService
 } from '@lessify/angular-core';
 import {TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, TranslocoModule} from '@ngneat/transloco';
 
 // AoT requires an exported function for factories
-export function TranslocoHttpLoaderFactory(service: TranslationV1Service) {
+export function TranslocoHttpLoaderFactory(service: TranslationService) {
   return new LessifyTranslocoV1HttpLoader(service);
 }
 
@@ -112,7 +112,7 @@ export function TranslocoHttpLoaderFactory(service: TranslationV1Service) {
         prodMode: false,
       })
     },
-    { provide: TRANSLOCO_LOADER, useFactory: TranslocoHttpLoaderFactory, deps: [TranslationV1Service]}
+    { provide: TRANSLOCO_LOADER, useFactory: TranslocoHttpLoaderFactory, deps: [TranslationService]}
   ],
   declarations: [
     AppComponent,

@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {BaseService} from '../base.service';
 import {SpaceConfig} from '../core.module';
+import {BaseService} from './base.service';
 
-export interface LessifyConfiguration {
+export interface Configurations {
   [key: string]: string | number | boolean;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigurationV1Service extends BaseService {
+export class ConfigurationService extends BaseService {
   constructor(
       readonly httpClient: HttpClient,
       readonly config: SpaceConfig
@@ -40,8 +40,8 @@ export class ConfigurationV1Service extends BaseService {
    *   "number": 1
    * }
    */
-  get(): Observable<any> {
-    return this.httpClient.get(
+  get(): Observable<Configurations> {
+    return this.httpClient.get<Configurations>(
         `${this.getRootUrl()}/v1/spaces/${this.getSpace()}/environments/${this.getEnvironment()}/configurations.json`,
         {
           headers: this.getHeaders()

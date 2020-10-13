@@ -1,10 +1,10 @@
 import {Observable} from 'rxjs';
-import {TranslationV1Service} from './translation-v1.service';
 import {Translation, TranslocoLoader} from '@ngneat/transloco';
+import {TranslationService} from '../services/translation.service';
 
-export class LessifyTranslocoV1HttpLoader implements TranslocoLoader {
+export class LessifyTranslocoHttpLoader implements TranslocoLoader {
   constructor(
-      private translationService: TranslationV1Service
+      private translationService: TranslationService
   ) {
   }
 

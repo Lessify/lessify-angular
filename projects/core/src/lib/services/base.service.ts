@@ -1,9 +1,9 @@
 import {HttpHeaders} from '@angular/common/http';
-import {SpaceConfig} from './core.module';
+import {SpaceConfig} from '../core.module';
 
 export abstract class BaseService {
 
-  constructor(
+  protected constructor(
       protected readonly config: SpaceConfig
   ) {
     if (this.config.spaceId == null || this.config.spaceId === '') {
