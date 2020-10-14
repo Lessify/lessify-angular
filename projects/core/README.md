@@ -22,7 +22,7 @@ import {AppComponent} from './app';
 
 // AoT requires an exported function for factories
 export function NgxTranslateHttpLoaderFactory(service: TranslationService) {
-    return new LessifyNgxTranslateV1HttpLoader(service);
+    return new LessifyNgxTranslateHttpLoader(service);
 }
 
 @NgModule({
@@ -70,14 +70,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {
   LessifyCoreModule,
-  LessifyTranslocoV1HttpLoader,
+  LessifyTranslocoHttpLoader,
   TranslationService
 } from '@lessify/angular-core';
 import {TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, TranslocoModule} from '@ngneat/transloco';
 
 // AoT requires an exported function for factories
 export function TranslocoHttpLoaderFactory(service: TranslationService) {
-  return new LessifyTranslocoV1HttpLoader(service);
+  return new LessifyTranslocoHttpLoader(service);
 }
 
 @NgModule({
