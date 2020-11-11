@@ -4,6 +4,10 @@
     "i18n-merge": {
       "description": "Merge i18n json files.",
       "factory": "./i18n-merge/index"
+    },
+    "i18n-csv": {
+      "description": "Merge i18n json files into CSV.",
+      "factory": "./i18n-csv/index"
     }
   }
 }
