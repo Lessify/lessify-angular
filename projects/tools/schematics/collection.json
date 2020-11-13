@@ -5,9 +5,13 @@
       "description": "Merge i18n json files.",
       "factory": "./i18n-merge/index"
     },
-    "i18n-csv": {
-      "description": "Merge i18n json files into CSV.",
-      "factory": "./i18n-csv/index"
+    "i18n-export-csv": {
+      "description": "Export all i18n json files into CSV.",
+      "factory": "./i18n-export-csv/index"
+    },
+    "i18n-import-csv": {
+      "description": "Import CSV file into all i18n json files.",
+      "factory": "./i18n-import-csv/index"
     }
   }
 }

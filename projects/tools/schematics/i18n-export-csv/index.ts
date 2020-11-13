@@ -5,7 +5,7 @@ const SEPARATOR = ',';
 const NEW_LINE = '\n';
 type Dictionary = { [key: string]: string};
 
-export default function i18nCsv(): Rule {
+export default function i18nExportCsv(): Rule {
   return chain([
     (tree: Tree, context: SchematicContext) => {
       const config: FileConfiguration = readConfig(tree);
