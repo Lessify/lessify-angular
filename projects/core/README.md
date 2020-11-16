@@ -4,9 +4,9 @@ This library is library for integration of your Angular project with [Lessify](h
 
 ## NGX-Translate Integration
 
-You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyNgxTranslateV1HttpLoader`.
+You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyNgxTranslateHttpLoader`.
 
-Here is how you would use the `LessifyNgxTranslateV1HttpLoader` to load translations from Lessify API:
+Here is how you would use the `LessifyNgxTranslateHttpLoader` to load translations from Lessify API:
 
 ```ts
 import {NgModule} from '@angular/core';
@@ -15,7 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {
   LessifyCoreModule,
-  LessifyTranslateV1HttpLoader,
+  LessifyTranslateHttpLoader,
   TranslationService
 } from '@lessify/angular-core';
 import {AppComponent} from './app'; 
@@ -54,9 +54,9 @@ export class AppModule { }
 
 ## ngneat Transloco Integration
 
-You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyTranslocoV1HttpLoader`.
+You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyTranslocoHttpLoader`.
 
-Here is how you would use the `LessifyTranslocoV1HttpLoader` to load translations from Lessify API:
+Here is how you would use the `LessifyTranslocoHttpLoader` to load translations from Lessify API:
 
 ```ts
 import {BrowserModule} from '@angular/platform-browser';
