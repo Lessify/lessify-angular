@@ -12,6 +12,10 @@
     "i18n-import-csv": {
       "description": "Import CSV file into all i18n json files.",
       "factory": "./i18n-import-csv/index"
+    },
+    "i18n-check": {
+      "description": "Check i18n integrity.",
+      "factory": "./i18n-check/index"
     }
   }
 }

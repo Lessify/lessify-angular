@@ -1,9 +1,9 @@
 import {chain, Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
-import {FileConfiguration} from '../config';
+import {Dictionary, FileConfiguration} from '../models';
+import {readConfig, readLanguage} from '../utils';
 
 const SEPARATOR = ',';
 const NEW_LINE = '\n';
-type Dictionary = { [key: string]: string};
 
 export default function i18nExportCsv(): Rule {
   return chain([
@@ -15,7 +15,7 @@ export default function i18nExportCsv(): Rule {
       let content = `"Key"`;
       for (const lang of config.languages) {
         context.logger.info(`Search for '${lang}' files.`);
-        const i18n: any = readLanguage(tree, config.cwd, lang);
+        const i18n: Dictionary = readLanguage(tree, config.cwd, lang);
         dictionary.set(lang, i18n);
         content += `${SEPARATOR}"${lang}"`;
       }
@@ -38,39 +38,6 @@ export default function i18nExportCsv(): Rule {
       return tree;
     }
   ]);
-}
-
-function readConfig(tree: Tree): FileConfiguration {
-  const defaultConfig: FileConfiguration = {
-    cwd: './src/app',
-    output: './src/assets/i18n',
-    languages: ['en']
-  };
-  const file = tree.read('lessify.json');
-  let config: FileConfiguration;
-  if (file) {
-    config = JSON.parse(file.toString());
-    return {...defaultConfig, ...config};
-  }
-  return defaultConfig;
-}
-
-function readLanguage(tree: Tree, cwd: string, lang: string): Dictionary {
-  let i18n: Dictionary = {};
-  tree.getDir(cwd)
-  .visit((filePath) => {
-    if (filePath.search(`/${lang}.json$`) === -1) {
-      return;
-    }
-    const buffer: Buffer | null = tree.read(filePath);
-    if (buffer) {
-      i18n = {
-        ...i18n,
-        ...JSON.parse(buffer.toString())
-      };
-    }
-  });
-  return i18n;
 }
 
 function save(tree: Tree, i18n: string, output: string): void {

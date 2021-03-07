@@ -1,7 +1,6 @@
 import {chain, Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
-import {FileConfiguration} from '../config';
-
-type Dictionary = { [key: string]: string };
+import {Dictionary, FileConfiguration} from '../models';
+import {readConfig} from '../utils';
 
 export default function i18nImportCsv(): Rule {
   return chain([
@@ -18,7 +17,7 @@ export default function i18nImportCsv(): Rule {
             langValue.forEach((value, key) => {
               const path = keyToPath.get(key);
               if (path) {
-                const dic = readLanguage(tree, path, langKey);
+                const dic: Dictionary = readLanguage(tree, path, langKey);
                 dic[key] = value;
                 saveLanguage(tree, dic, `${path}/${langKey}.json`);
               }
@@ -28,21 +27,6 @@ export default function i18nImportCsv(): Rule {
       return tree;
     }
   ]);
-}
-
-function readConfig(tree: Tree): FileConfiguration {
-  const defaultConfig: FileConfiguration = {
-    cwd: './src/app',
-    output: './src/assets/i18n',
-    languages: ['en']
-  };
-  const file = tree.read('lessify.json');
-  let config: FileConfiguration;
-  if (file) {
-    config = JSON.parse(file.toString());
-    return {...defaultConfig, ...config};
-  }
-  return defaultConfig;
 }
 
 function readCSV(tree: Tree, context: SchematicContext, config: FileConfiguration): Map<string, Map<string, string>> {
