@@ -123,6 +123,28 @@ export class AppModule {
 }
 ```
 
+## Directives
+
+Use Lessify directives in order to annotate your code with additional metadata that will help you to visualise in Design Mode.
+
+### Translation
+
+Use the ``lessifyTranslation`` directive to annotate a specific translation ID to be visible and manageable in Design Mode.
+
+```html
+<div lessifyTranslation="login.form.email">{{ ... }}</div>
+```
+
+### Configuration
+
+Use the ``lessifyConfiguration`` directive to annotate a specific configuration ID to be visible and manageable in Design Mode.
+
+```html
+<div *ngIf="config.maintenance" lessifyConfiguration="maintenance">
+  ...
+</div>
+```
+
 ## Testing
 In your project, link the @lessify/angular-core we just built:
 

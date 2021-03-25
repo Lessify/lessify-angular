@@ -70,7 +70,7 @@ In your project, link the @lessify/angular-tools we just built:
 
 ``npm link $PATH_TO_SCHEMATIC_PROJECT``
 
-Replace **$PATH_TO_SCHEMATIC_PROJECT** with the path to the **@lessify/angular-tools** project’s root. Note that users will install instead of linking, this is just to iterate faster locally while developing.
+Replace **$PATH_TO_SCHEMATIC_PROJECT** with the path to the **@lessify/angular-tools** project’s root.
 Note that users will install instead of linking, this is just to iterate faster locally while developing.
 Once your schematic project is linked, you can use ng generate to call your schematics:
 

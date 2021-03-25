@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {SpaceConfig} from '../core.module';
 import {BaseService} from './base.service';
+import {SpaceConfig} from '../models/module.model';
 
 export interface Configurations {
   [key: string]: string | number | boolean;

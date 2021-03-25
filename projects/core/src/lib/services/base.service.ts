@@ -1,5 +1,5 @@
 import {HttpHeaders} from '@angular/common/http';
-import {SpaceConfig} from '../core.module';
+import {SpaceConfig} from '../models/module.model';
 
 export abstract class BaseService {
 

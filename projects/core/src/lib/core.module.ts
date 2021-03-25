@@ -3,22 +3,20 @@ import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {ConfigurationService} from './services/configuration.service';
 import {TranslationService} from './services/translation.service';
-
-export interface LessifyCoreModuleConfig {
-  space: SpaceConfig;
-}
-
-export class SpaceConfig {
-  spaceId: string;
-  environment: string;
-  apiKey: string;
-  beta?: boolean;
-}
+import {LessifyTranslationDirective} from './directives/lessify-translation.directive';
+import {LessifyConfigurationDirective} from './directives/lessify-configuration.directive';
+import {LessifyCoreModuleConfig, SpaceConfig} from './models/module.model';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LessifyTranslationDirective,
+    LessifyConfigurationDirective
+  ],
   imports: [CommonModule, HttpClientModule],
-  exports: []
+  exports: [
+    LessifyTranslationDirective,
+    LessifyConfigurationDirective
+  ]
 })
 export class LessifyCoreModule {
   static forRoot(config: LessifyCoreModuleConfig): ModuleWithProviders<LessifyCoreModule> {

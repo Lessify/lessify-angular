@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {SpaceConfig} from '../core.module';
 import {Observable} from 'rxjs';
 import {BaseService} from './base.service';
+import {SpaceConfig} from '../models/module.model';
 
 export interface Messages {
   [key: string]: string;
