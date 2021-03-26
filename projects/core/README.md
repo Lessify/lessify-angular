@@ -126,6 +126,42 @@ export class AppModule {
 ## Directives
 
 Use Lessify directives in order to annotate your code with additional metadata that will help you to visualise in Design Mode.
+Add `LessifyDirectiveModule` into your app module.
+
+```ts
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  LessifyCoreModule,
+  LessifyDirectiveModule,
+} from '@lessify/angular-core';
+
+
+@NgModule({
+  imports: [
+    ...
+    LessifyCoreModule.forRoot(
+        {
+          space: {
+            spaceId: 'your-space-id',
+            environment: 'master',
+            apiKey: 'your-api-key'
+          }
+        }
+    ),
+    LessifyDirectiveModule  
+  ],
+  declarations: [
+    AppComponent,
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
 
 ### Translation
 
