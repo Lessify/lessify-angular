@@ -12,5 +12,5 @@ import {LessifyConfigurationDirective} from './directives/lessify-configuration.
     LessifyConfigurationDirective
   ]
 })
-export class LessifyDirectiveModule {
+export class LessifyEditorModule {
 }
