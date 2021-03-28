@@ -24,7 +24,11 @@ export class LessifyTranslationDirective implements OnInit {
   @HostListener('click')
   onClick(): void {
     if (this.isInIframe()) {
-      window.parent.postMessage({}, '*');
+      window.parent.postMessage({
+        action: 'link',
+        type: 'translation',
+        id: this.lessifyTranslation
+      }, '*');
     }
   }
 
