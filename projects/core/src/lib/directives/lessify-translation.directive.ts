@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnInit} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 
 @Directive({
   selector: '[lessifyTranslation]'
@@ -15,5 +15,20 @@ export class LessifyTranslationDirective implements OnInit {
       return;
     }
     this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessifyTranslation);
+    if (this.isInIframe()) {
+      this.el.nativeElement.style.outline = 'black dashed';
+      // this.el.nativeElement.style.outlineOffset = '3px';
+    }
+  }
+
+  @HostListener('click')
+  onClick(): void {
+    if (this.isInIframe()) {
+      window.parent.postMessage({}, '*');
+    }
+  }
+
+  isInIframe(): boolean {
+    return window.location !== window.parent.location;
   }
 }
