@@ -1,4 +1,5 @@
 import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {DesignAction, DesignModelType, DesignEvent} from '../models/design.model';
 
 @Directive({
   selector: '[lessifyTranslation]'
@@ -25,10 +26,10 @@ export class LessifyTranslationDirective implements OnInit {
   onClick(): void {
     if (this.isInIframe()) {
       window.parent.postMessage({
-        action: 'link',
-        type: 'translation',
+        action: DesignAction.LINK,
+        type: DesignModelType.TRANSLATION,
         id: this.lessifyTranslation
-      }, '*');
+      } as DesignEvent, window.parent.location.origin);
     }
   }
 

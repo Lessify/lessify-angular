@@ -9,5 +9,6 @@ export * from './lib/services/configuration.service';
 export * from './lib/loader/ngx-translate.loader';
 export * from './lib/loader/transloco.loader';
 export * from './lib/models/module.model';
+export * from './lib/models/design.model';
 export * from './lib/core.module';
 export * from './lib/editor.module';
