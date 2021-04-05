@@ -15,8 +15,8 @@ export class LessifyConfigurationDirective implements OnInit {
     if (typeof this.lessifyConfiguration === undefined) {
       return;
     }
-    this.el.nativeElement.setAttribute('data-lessify-configuration-id', this.lessifyConfiguration);
     if (this.isInIframe()) {
+      this.el.nativeElement.setAttribute('data-lessify-configuration-id', this.lessifyConfiguration);
       this.el.nativeElement.style.outline = 'black dashed';
       // this.el.nativeElement.style.outlineOffset = '3px';
     }
