@@ -9,8 +9,6 @@ import {TranslocoService} from '@ngneat/transloco';
 export class LessifyTranslationDirective implements OnInit {
 
   @Input() lessifyTranslation: string;
-  language?: string;
-
   constructor(
       private el: ElementRef,
       @Optional() private readonly translateService: TranslateService,
@@ -26,11 +24,6 @@ export class LessifyTranslationDirective implements OnInit {
       this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessifyTranslation);
       this.el.nativeElement.style.outline = 'black dashed';
       // this.el.nativeElement.style.outlineOffset = '3px';
-      if (this.translateService) {
-        this.language = this.translateService.currentLang;
-      } else if (this.translocoService) {
-        this.language = this.translocoService.getActiveLang();
-      }
     }
   }
 
@@ -42,7 +35,7 @@ export class LessifyTranslationDirective implements OnInit {
             action: DesignAction.LINK,
             type: DesignModelType.TRANSLATION,
             id: this.lessifyTranslation,
-            lang: this.language
+            lang:  this.getCurrentLanguage()
           } as DesignEvent,
           '*' // window.parent.location.origin
       );
@@ -51,5 +44,14 @@ export class LessifyTranslationDirective implements OnInit {
 
   isInIframe(): boolean {
     return window.location !== window.parent.location;
+  }
+
+  getCurrentLanguage(): string | null {
+    if (this.translateService) {
+      return this.translateService.currentLang;
+    } else if (this.translocoService) {
+      return this.translocoService.getActiveLang();
+    }
+    return null;
   }
 }
