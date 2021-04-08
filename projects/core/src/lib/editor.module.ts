@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {LessifyTranslationDirective} from './directives/lessify-translation.directive';
 import {LessifyConfigurationDirective} from './directives/lessify-configuration.directive';
+import {EditorService} from './services/editor.service';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,9 @@ import {LessifyConfigurationDirective} from './directives/lessify-configuration.
   exports: [
     LessifyTranslationDirective,
     LessifyConfigurationDirective
+  ],
+  providers: [
+    EditorService
   ]
 })
 export class LessifyEditorModule {

@@ -6,7 +6,8 @@ export interface DesignEvent {
 }
 
 export enum DesignAction {
-  LINK = 'link'
+  LINK = 'link',
+  RELOAD = 'reload'
 }
 
 export enum DesignModelType {

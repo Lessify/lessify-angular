@@ -17,7 +17,8 @@ export class LessifyConfigurationDirective implements OnInit {
     }
     if (this.isInIframe()) {
       this.el.nativeElement.setAttribute('data-lessify-configuration-id', this.lessifyConfiguration);
-      this.el.nativeElement.style.outline = 'black dashed';
+      this.el.nativeElement.style.outline = '#23252B dashed';
+      this.el.nativeElement.title = `Configuration: ${this.lessifyConfiguration}`;
       // this.el.nativeElement.style.outlineOffset = '3px';
     }
   }
@@ -29,7 +30,7 @@ export class LessifyConfigurationDirective implements OnInit {
         action: DesignAction.LINK,
         type: DesignModelType.CONFIGURATION,
         id: this.lessifyConfiguration
-      } as DesignEvent, window.parent.location.origin);
+      } as DesignEvent, '*');
     }
   }
 
