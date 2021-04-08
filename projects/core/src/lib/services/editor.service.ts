@@ -12,8 +12,15 @@ export class EditorService {
       @Optional() private readonly translateService: TranslateService,
       @Optional() private readonly translocoService: TranslocoService
   ) {
-    window.addEventListener('message', (event: MessageEvent) => {
+    if (this.isInIframe()) {
+      console.log('Start message listener');
+      window.addEventListener('message', (event: MessageEvent<DesignEvent>) => {
+        console.log(event);
+      });
+    }
+  }
 
-    });
+  isInIframe(): boolean {
+    return window.location !== window.parent.location;
   }
 }
