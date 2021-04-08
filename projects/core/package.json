@@ -2,7 +2,7 @@
   "name": "@lessify/angular-core",
   "description": "",
   "author": "Lessify",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "license": "MIT",
   "homepage": "https://github.com/Lessify/lessify-angular",
   "repository": {
@@ -15,14 +15,16 @@
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
     "@angular/core": ">=8.0.0",
-    "tslib": ">=1.10.0",
     "rxjs": ">=6.3.0"
   },
   "optionalDependencies": {
-    "@ngx-translate/core": ">=11.0.0",
-    "@ngneat/transloco": ">=2.0.0"
+    "@ngx-translate/core": ">=13.0.0",
+    "@ngneat/transloco": ">=2.20.0"
   },
   "main": "karma.conf.js",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
