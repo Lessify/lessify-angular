@@ -37,7 +37,7 @@ export class LessifyTranslationDirective implements OnInit {
             action: DesignAction.LINK,
             type: DesignModelType.TRANSLATION,
             id: this.lessifyTranslation,
-            lang: this.getCurrentLanguage()
+            locale: this.getCurrentLanguage()
           } as DesignEvent,
           '*' // window.parent.location.origin
       );

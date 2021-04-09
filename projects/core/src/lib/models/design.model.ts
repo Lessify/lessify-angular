@@ -2,12 +2,14 @@ export interface DesignEvent {
   action: DesignAction;
   type: DesignModelType;
   id: string;
-  lang?: string;
+  locale?: string;
+  value?: string;
 }
 
 export enum DesignAction {
   LINK = 'link',
-  RELOAD = 'reload'
+  RELOAD = 'reload',
+  UPDATE = 'update'
 }
 
 export enum DesignModelType {
