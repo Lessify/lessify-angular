@@ -15,23 +15,26 @@ export type Configuration = string | number | boolean;
 })
 export class ConfigurationService extends BaseService {
 
-  configurations: Map<string, Configuration> = new Map<string, Configuration>();
+  private configurations: Configurations = {};
 
   constructor(
       readonly httpClient: HttpClient,
       @Inject(LESSIFY_CONFIG) readonly config: LessifyConfig
   ) {
     super(config);
+    this.sync();
   }
 
   get(id: string): Configuration | undefined {
-    return this.configurations.get(id);
+    return this.configurations[id];
+  }
+
+  getAll(): Configurations {
+    return this.configurations;
   }
 
   sync(): void {
-    this.fetch().subscribe( configs => {
-      Object.getOwnPropertyNames(configs).forEach( it => this.configurations.set(it, configs[it]));
-    });
+    this.fetch().subscribe(it => this.configurations = it);
   }
 
   /**
@@ -44,19 +47,8 @@ export class ConfigurationService extends BaseService {
    *   "number": 1
    * }
    */
-  fetch<T>(): Observable<T>;
-  /**
-   * get Configurations
-   * examples:
-   * {
-   *   "boolean": true,
-   *   "date": "2020-02-20",
-   *   "text": "any value",
-   *   "number": 1
-   * }
-   */
-  fetch(): Observable<Configurations> {
-    return this.httpClient.get<Configurations>(
+  fetch<T = Configurations>(): Observable<T> {
+    return this.httpClient.get<T>(
         `${this.getRootUrl()}/v1/spaces/${this.getSpace()}/environments/${this.getEnvironment()}/configurations.json`,
         {
           headers: this.getHeaders()

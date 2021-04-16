@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfigurationModel} from '../shared/configuration.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {ConfigurationService, TranslationService} from '@lessify/angular-core';
+import {Configurations, ConfigurationService, TranslationService} from '@lessify/angular-core';
 
 @Component({
   selector: 'app-ngx-translate',
@@ -11,7 +10,7 @@ import {ConfigurationService, TranslationService} from '@lessify/angular-core';
   styleUrls: ['./ngx-translate.component.scss']
 })
 export class NgxTranslateComponent implements OnInit {
-  configuration: ConfigurationModel;
+  configurations: Configurations;
   form: FormGroup;
   loginInvalid: boolean;
 
@@ -29,14 +28,12 @@ export class NgxTranslateComponent implements OnInit {
       username: ['', Validators.email],
       password: ['', Validators.required]
     });
-    this.configurationService
-    .fetch<ConfigurationModel>()
-    .subscribe(response => (this.configuration = response));
+    this.configurations = this.configurationService.getAll();
   }
 
 
   onSubmit(): void {
-    if ( this.form.controls.username.value === 'admin' && this.form.controls.password.value === 'admin') {
+    if (this.form.controls.username.value === 'admin' && this.form.controls.password.value === 'admin') {
       this.loginInvalid = false;
     } else {
       this.loginInvalid = true;

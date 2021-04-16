@@ -14,6 +14,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {
+  LESSIFY_CONFIG, LessifyConfig,
   LessifyCoreModule,
   LessifyTranslateHttpLoader,
   TranslationService
@@ -29,15 +30,7 @@ export function NgxTranslateHttpLoaderFactory(service: TranslationService) {
     imports: [
         BrowserModule,
         HttpClientModule,
-        LessifyCoreModule.forRoot(
-            {
-              space: {
-                spaceId: 'your-space-id',
-                environment: 'master',
-                apiKey: 'your-api-key'
-              }
-            }
-        ),
+        LessifyCoreModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -47,6 +40,16 @@ export function NgxTranslateHttpLoaderFactory(service: TranslationService) {
             defaultLanguage: 'en'
         })
     ],
+    providers: [
+        {
+          provide: LESSIFY_CONFIG,
+          useValue: {
+            spaceId: 'your-space-id',
+            environment: 'master',
+            apiKey: 'your-api-key'
+          } as LessifyConfig
+        }
+      ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
@@ -69,6 +72,7 @@ import {LoginComponent} from './login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {
+  LESSIFY_CONFIG, LessifyConfig,
   LessifyCoreModule,
   LessifyTranslocoHttpLoader,
   TranslationService
@@ -87,17 +91,17 @@ export function TranslocoHttpLoaderFactory(service: TranslationService) {
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    LessifyCoreModule.forRoot(
-        {
-          space: {
-            spaceId: 'your-space-id',
-            environment: 'master',
-            apiKey: 'your-api-key'
-          }
-        }
-    ),
+    LessifyCoreModule,
   ],
   providers: [
+    {
+      provide: LESSIFY_CONFIG,
+      useValue: {
+        spaceId: 'your-space-id',
+        environment: 'master',
+        apiKey: 'your-api-key'
+      } as LessifyConfig
+    },
     {
       provide: TRANSLOCO_CONFIG,
       useValue: translocoConfig({
@@ -126,49 +130,13 @@ export class AppModule {
 ## Editor
 
 Use Lessify directives in order to annotate your code with additional metadata that will help you to visualise in Design Mode.
-Add `LessifyEditorModule` into your app module.
-
-```ts
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  LessifyCoreModule,
-  LessifyEditorModule,
-} from '@lessify/angular-core';
-
-
-@NgModule({
-  imports: [
-    ...
-    LessifyCoreModule.forRoot(
-        {
-          space: {
-            spaceId: 'your-space-id',
-            environment: 'master',
-            apiKey: 'your-api-key'
-          }
-        }
-    ),
-    LessifyEditorModule  
-  ],
-  declarations: [
-    AppComponent,
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-}
-```
 
 ### Translation
 
 Use the ``lessifyTranslation`` directive to annotate a specific translation ID to be visible and manageable in Design Mode.
 
 ```html
-<div lessifyTranslation="login.form.email">{{ ... }}</div>
+<div lessifyTransl="login.form.email">{{ ... }}</div>
 ```
 
 ### Configuration
@@ -176,7 +144,7 @@ Use the ``lessifyTranslation`` directive to annotate a specific translation ID t
 Use the ``lessifyConfiguration`` directive to annotate a specific configuration ID to be visible and manageable in Design Mode.
 
 ```html
-<div *ngIf="config.maintenance" lessifyConfiguration="maintenance">
+<div *ngIf="config.maintenance" lessifyConfig="maintenance">
   ...
 </div>
 ```
