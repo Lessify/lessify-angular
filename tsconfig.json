@@ -23,7 +23,8 @@
       "tools": [
         "dist/tools/tools",
         "dist/tools"
-      ]
+      ],
+      "@lessify/angular-core": ["./projects/core/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

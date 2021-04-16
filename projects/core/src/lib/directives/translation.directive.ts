@@ -2,13 +2,14 @@ import {Directive, ElementRef, HostListener, Input, OnInit, Optional} from '@ang
 import {DesignAction, DesignEvent, DesignModelType} from '../models/design.model';
 import {TranslateService} from '@ngx-translate/core';
 import {TranslocoService} from '@ngneat/transloco';
+import {DesignUtil} from '../utils/design.util';
 
 @Directive({
-  selector: '[lessifyTranslation]'
+  selector: '[lessifyTransl]'
 })
-export class LessifyTranslationDirective implements OnInit {
+export class TranslationDirective implements OnInit {
 
-  @Input() lessifyTranslation: string;
+  @Input() lessTransl: string;
 
   constructor(
       private el: ElementRef,
@@ -18,34 +19,30 @@ export class LessifyTranslationDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (typeof this.lessifyTranslation === undefined) {
+    if (typeof this.lessTransl === undefined) {
       return;
     }
-    if (this.isInIframe()) {
-      this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessifyTranslation);
+    if (DesignUtil.isInIframe()) {
+      this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessTransl);
       this.el.nativeElement.style.outline = '#003DFF dashed';
-      this.el.nativeElement.title = `Translation: ${this.lessifyTranslation}`;
+      this.el.nativeElement.title = `Translation: ${this.lessTransl}`;
       // this.el.nativeElement.style.outlineOffset = '3px';
     }
   }
 
   @HostListener('click')
   onClick(): void {
-    if (this.isInIframe()) {
+    if (DesignUtil.isInIframe()) {
       window.parent.postMessage(
           {
             action: DesignAction.LINK,
             type: DesignModelType.TRANSLATION,
-            id: this.lessifyTranslation,
+            id: this.lessTransl,
             locale: this.getCurrentLanguage()
           } as DesignEvent,
           '*' // window.parent.location.origin
       );
     }
-  }
-
-  isInIframe(): boolean {
-    return window.location !== window.parent.location;
   }
 
   getCurrentLanguage(): string | null {

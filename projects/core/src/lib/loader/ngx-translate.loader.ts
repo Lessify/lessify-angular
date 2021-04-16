@@ -12,6 +12,6 @@ export class LessifyNgxTranslateHttpLoader implements TranslateLoader {
    * Gets the translations from the server
    */
   public getTranslation(lang: string): Observable<any> {
-    return this.translationService.get(lang);
+    return this.translationService.fetch(lang);
   }
 }

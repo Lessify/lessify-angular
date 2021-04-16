@@ -1,10 +1,10 @@
 import {HttpHeaders} from '@angular/common/http';
-import {SpaceConfig} from '../models/module.model';
+import {LessifyConfig} from '../lessify.config';
 
 export abstract class BaseService {
 
   protected constructor(
-      protected readonly config: SpaceConfig
+      protected readonly config: LessifyConfig
   ) {
     if (this.config.spaceId == null || this.config.spaceId === '') {
       throw new Error('Lessify Configuration Space can\'t be empty');

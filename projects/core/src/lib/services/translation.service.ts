@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BaseService} from './base.service';
-import {SpaceConfig} from '../models/module.model';
+import {LESSIFY_CONFIG, LessifyConfig} from '../lessify.config';
 
 export interface Messages {
   [key: string]: string;
@@ -15,14 +15,13 @@ export class TranslationService extends BaseService {
 
   constructor(
       readonly httpClient: HttpClient,
-      readonly config: SpaceConfig
+      @Inject(LESSIFY_CONFIG) readonly config: LessifyConfig
   ) {
     super(config);
   }
 
   /**
    * get Translation, possible values:
-   * - 'default': provide default values
    * - locale: specific locale id from space
    * - 'all': in one call you will receive all locales in next format
    * {
@@ -34,7 +33,7 @@ export class TranslationService extends BaseService {
    *   }
    * }
    */
-  get(locale: string = 'default'): Observable<Messages> {
+  fetch(locale: string): Observable<Messages> {
     return this.httpClient.get<Messages>(
         `${this.getRootUrl()}/v1/spaces/${this.getSpace()}/environments/${this.getEnvironment()}/translations.${locale}.json`,
         {

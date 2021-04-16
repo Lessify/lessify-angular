@@ -12,6 +12,6 @@ export class LessifyTranslocoHttpLoader implements TranslocoLoader {
    * Gets the translations from the server
    */
   public getTranslation(lang: string): Observable<Translation> {
-    return this.translationService.get(lang);
+    return this.translationService.fetch(lang);
   }
 }

@@ -1,41 +1,70 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {NgModule, Optional} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {ConfigurationService} from './services/configuration.service';
 import {TranslationService} from './services/translation.service';
-import {LessifyCoreModuleConfig, SpaceConfig} from './models/module.model';
+import {TranslateService} from '@ngx-translate/core';
+import {TranslocoService} from '@ngneat/transloco';
+import {DesignAction, DesignEvent, DesignModelType} from './models/design.model';
+import {DesignUtil} from './utils/design.util';
+import {TranslationDirective} from './directives/translation.directive';
+import {ConfigurationDirective} from './directives/configuration.directive';
+
+const LESSIFY_WINDOW = 'lessify';
 
 @NgModule({
-  declarations: [],
+  id: 'lessify-core',
+  declarations: [
+    TranslationDirective,
+    ConfigurationDirective,
+  ],
   imports: [CommonModule, HttpClientModule],
-  exports: []
+  exports: [
+    TranslationDirective,
+    ConfigurationDirective,
+  ],
+  providers: [
+    ConfigurationService,
+    TranslationService
+  ]
 })
 export class LessifyCoreModule {
-  static forRoot(config: LessifyCoreModuleConfig): ModuleWithProviders<LessifyCoreModule> {
-    return {
-      ngModule: LessifyCoreModule,
-      providers: [
-        {
-          provide: SpaceConfig,
-          useValue: config.space
-        },
-        ConfigurationService,
-        TranslationService
-      ]
-    };
-  }
-
-  static forChild(config: LessifyCoreModuleConfig): ModuleWithProviders<LessifyCoreModule> {
-    return {
-      ngModule: LessifyCoreModule,
-      providers: [
-        {
-          provide: SpaceConfig,
-          useValue: config.space
-        },
-        ConfigurationService,
-        TranslationService
-      ]
-    };
+  constructor(
+      @Optional() private readonly translateService: TranslateService,
+      @Optional() private readonly translocoService: TranslocoService
+  ) {
+    // console.log(`LessifyEditorModule : constructor -> ${this.isInIframe()} - ${window.location}`);
+    if (DesignUtil.isInIframe() && !window[LESSIFY_WINDOW]) {
+      window[LESSIFY_WINDOW] = {editor: true};
+      console.log('Start message listener');
+      window.addEventListener('message', (event: MessageEvent<DesignEvent>) => {
+        if (event.origin !== 'https://app.lessify.io' && event.origin !== 'https://dev-app.lessify.io' && event.origin !== 'http://localhost:4200') {
+          return;
+        }
+        console.log(event);
+        if (event.data.action === DesignAction.UPDATE) {
+          switch (event.data.type) {
+            case DesignModelType.TRANSLATION: {
+              if (this.translateService) {
+                this.translateService.set(event.data.id, event.data.value, event.data.locale);
+              } else if (this.translocoService) {
+                this.translocoService.setTranslationKey(event.data.id, event.data.value, event.data.locale);
+              }
+              break;
+            }
+            case DesignModelType.CONFIGURATION: {
+              break;
+            }
+            default: {
+              console.log('Unknown data type.');
+            }
+          }
+        } else if (event.data.action === DesignAction.RELOAD) {
+          window.location.reload();
+        } else {
+          console.log('Unknown data action.');
+        }
+      });
+    }
   }
 }

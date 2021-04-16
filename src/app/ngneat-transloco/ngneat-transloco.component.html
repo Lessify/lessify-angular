@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center" style="height: 100%">
+  <form class="form-signin" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="d-flex justify-content-center">
+      Ngneat Transloco
+    </div>
+    <br/>
+    <div class="d-flex justify-content-center">
+      Change Language :
+      <button mat-raised-button (click)="change('en')">English</button>
+      <button mat-raised-button (click)="change('de')">German</button>
+    </div>
+    <br/>
+    <mat-divider></mat-divider>
+    <div class="d-flex justify-content-center">
+      {{ 'login.title' | transloco }}
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'login.email' | transloco }}</mat-label>
+      <input matInput formControlName="username" required>
+      <mat-error>
+        {{ 'login.email.error' | transloco }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'login.password' | transloco }}</mat-label>
+      <input matInput formControlName="password" required>
+      <mat-error>
+        {{ 'login.password.error' | transloco }}
+      </mat-error>
+    </mat-form-field>
+    <br/>
+    <div class="d-flex justify-content-around">
+      <button mat-raised-button color="primary">{{ 'login.submit' | transloco }}</button>
+      <button mat-raised-button color="accent">{{ 'login.reset' | transloco }}</button>
+    </div>
+    <mat-error *ngIf="loginInvalid">
+      {{ 'login.auth.wrong' | transloco }}
+    </mat-error>
+    <br/>
+    <div *ngIf="configuration?.maintenance" class="d-flex justify-content-center"
+         style="color: red">
+      {{ 'login.maintenance.message' | transloco }}
+    </div>
+  </form>
+</div>
