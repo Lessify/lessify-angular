@@ -1,6 +1,7 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 import {DesignAction, DesignEvent, DesignModelType} from '../models/design.model';
 import {DesignUtil} from '../utils/design.util';
+import {ConfigurationService} from '../services/configuration.service';
 
 @Directive({
   selector: '[lessifyConfig]'
@@ -9,7 +10,11 @@ export class ConfigurationDirective implements OnInit {
 
   @Input() lessConfig: string;
 
-  constructor(private el: ElementRef) {
+  constructor(
+      private el: ElementRef,
+      private readonly configurationService: ConfigurationService,
+      private readonly cd: ChangeDetectorRef,
+  ) {
   }
 
   ngOnInit(): void {

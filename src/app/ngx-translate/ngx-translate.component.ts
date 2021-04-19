@@ -28,7 +28,7 @@ export class NgxTranslateComponent implements OnInit {
       username: ['', Validators.email],
       password: ['', Validators.required]
     });
-    this.configurations = this.configurationService.getAll();
+    this.configurationService.configsChanges$.subscribe(it => this.configurations = it);
   }
 
 
@@ -42,5 +42,9 @@ export class NgxTranslateComponent implements OnInit {
 
   change(lang: string): void {
     this.translate.use(lang);
+  }
+
+  changeConfig(): void {
+    this.configurationService.set('maintenance', !this.configurations.maintenance);
   }
 }

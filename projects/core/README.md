@@ -2,7 +2,9 @@
 
 This library is library for integration of your Angular project with [Lessify](https://lessify.io/).
 
-## NGX-Translate Integration
+## Translations
+
+### NGX-Translate Integration
 
 You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyNgxTranslateHttpLoader`.
 
@@ -55,7 +57,7 @@ export function NgxTranslateHttpLoaderFactory(service: TranslationService) {
 export class AppModule { }
 ```
 
-## ngneat Transloco Integration
+### ngneat Transloco Integration
 
 You can import an existing `TranslateLoader` implemented by Lessfy with name `LessifyTranslocoHttpLoader`.
 
@@ -127,13 +129,42 @@ export class AppModule {
 }
 ```
 
+### Configurations
+
+Our Recommendation is to subscribe to configuration changes in your component:
+
+````ts
+import {Component, OnInit} from '@angular/core';
+import {Configurations, ConfigurationService, TranslationService} from '@lessify/angular-core';
+
+@Component({
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.scss']
+})
+export class TestComponent implements OnInit {
+  configurations: Configurations;
+
+  constructor(
+      private readonly translateService: TranslationService,
+      private readonly configurationService: ConfigurationService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.configurationService.configsChanges$.subscribe(it => this.configurations = it);
+  }
+  //...
+}
+````
+
 ## Editor
 
 Use Lessify directives in order to annotate your code with additional metadata that will help you to visualise in Design Mode.
 
 ### Translation
 
-Use the ``lessifyTranslation`` directive to annotate a specific translation ID to be visible and manageable in Design Mode.
+Use the ``lessifyTransl`` directive to annotate a specific translation ID to be visible and manageable in Design Mode.
 
 ```html
 <div lessifyTransl="login.form.email">{{ ... }}</div>
@@ -141,7 +172,7 @@ Use the ``lessifyTranslation`` directive to annotate a specific translation ID t
 
 ### Configuration
 
-Use the ``lessifyConfiguration`` directive to annotate a specific configuration ID to be visible and manageable in Design Mode.
+Use the ``lessifyConfig`` directive to annotate a specific configuration ID to be visible and manageable in Design Mode.
 
 ```html
 <div *ngIf="config.maintenance" lessifyConfig="maintenance">

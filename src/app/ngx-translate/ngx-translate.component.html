@@ -37,6 +37,10 @@
       {{ 'login.auth.wrong' | translate }}
     </mat-error>
     <br/>
+    <div>
+      <button mat-raised-button color="warn" (click)="changeConfig()">Change Maintenance Config</button>
+    </div>
+    <br/>
     <div *ngIf="configurations?.maintenance" class="d-flex justify-content-center"
          style="color: red">
       {{ 'login.maintenance.message' | translate }}

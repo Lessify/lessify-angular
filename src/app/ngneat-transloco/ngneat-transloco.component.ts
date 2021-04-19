@@ -28,7 +28,7 @@ export class NgneatTranslocoComponent implements OnInit {
       username: ['', Validators.email],
       password: ['', Validators.required]
     });
-    this.configurations = this.configurationService.getAll();
+    this.configurationService.configsChanges$.subscribe(it => this.configurations = it);
   }
 
   onSubmit(): void {
@@ -41,5 +41,9 @@ export class NgneatTranslocoComponent implements OnInit {
 
   change(lang: string): void {
     this.service.setActiveLang(lang);
+  }
+
+  changeConfig(): void {
+    this.configurationService.set('maintenance', !this.configurations.maintenance);
   }
 }

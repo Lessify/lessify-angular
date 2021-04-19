@@ -37,9 +37,14 @@
       {{ 'login.auth.wrong' | transloco }}
     </mat-error>
     <br/>
-    <div *ngIf="configuration?.maintenance" class="d-flex justify-content-center"
+    <div>
+      <button mat-raised-button color="warn" (click)="changeConfig()">Change Maintenance Config</button>
+    </div>
+    <br/>
+    <div *ngIf="configurations?.maintenance" class="d-flex justify-content-center"
          style="color: red">
       {{ 'login.maintenance.message' | transloco }}
     </div>
+
   </form>
 </div>

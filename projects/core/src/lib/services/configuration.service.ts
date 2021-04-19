@@ -1,8 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {BaseService} from './base.service';
 import {LESSIFY_CONFIG, LessifyConfig} from '../lessify.config';
+import {tap} from 'rxjs/operators';
 
 export interface Configurations {
   [key: string]: Configuration;
@@ -16,12 +17,20 @@ export type Configuration = string | number | boolean;
 export class ConfigurationService extends BaseService {
 
   private configurations: Configurations = {};
+  private configurationsEvents: BehaviorSubject<Configurations>;
+  private configurationEvents: Subject<string>;
+  configChanges$: Observable<string>;
+  configsChanges$: Observable<Configurations>;
 
   constructor(
-      readonly httpClient: HttpClient,
-      @Inject(LESSIFY_CONFIG) readonly config: LessifyConfig
+      private readonly httpClient: HttpClient,
+      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyConfig
   ) {
     super(config);
+    this.configurationsEvents = new BehaviorSubject<Configurations>(this.configurations);
+    this.configurationEvents = new Subject<string>();
+    this.configsChanges$ = this.configurationsEvents.asObservable();
+    this.configChanges$ = this.configurationEvents.asObservable();
     this.sync();
   }
 
@@ -33,8 +42,24 @@ export class ConfigurationService extends BaseService {
     return this.configurations;
   }
 
+  set(id: string, value: Configuration): void {
+    if (id == null || id === '' || value == null) {
+      return;
+    }
+    this.configurations[id] = value;
+    this.configurationsEvents.next(this.configurations);
+    this.configurationEvents.next(id);
+  }
+
   sync(): void {
-    this.fetch().subscribe(it => this.configurations = it);
+    this.fetch()
+    .pipe(
+        tap(it => {
+          this.configurationsEvents.next(it);
+          this.configurationEvents.next('*');
+        })
+    )
+    .subscribe(it => this.configurations = it);
   }
 
   /**

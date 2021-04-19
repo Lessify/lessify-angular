@@ -9,6 +9,7 @@ import {DesignAction, DesignEvent, DesignModelType} from './models/design.model'
 import {DesignUtil} from './utils/design.util';
 import {TranslationDirective} from './directives/translation.directive';
 import {ConfigurationDirective} from './directives/configuration.directive';
+import {Router} from '@angular/router';
 
 const LESSIFY_WINDOW = 'lessify';
 
@@ -30,8 +31,10 @@ const LESSIFY_WINDOW = 'lessify';
 })
 export class LessifyCoreModule {
   constructor(
+      private readonly configurationService: ConfigurationService,
       @Optional() private readonly translateService: TranslateService,
-      @Optional() private readonly translocoService: TranslocoService
+      @Optional() private readonly translocoService: TranslocoService,
+      private readonly router: Router,
   ) {
     // console.log(`LessifyEditorModule : constructor -> ${this.isInIframe()} - ${window.location}`);
     if (DesignUtil.isInIframe() && !window[LESSIFY_WINDOW]) {
@@ -46,13 +49,14 @@ export class LessifyCoreModule {
           switch (event.data.type) {
             case DesignModelType.TRANSLATION: {
               if (this.translateService) {
-                this.translateService.set(event.data.id, event.data.value, event.data.locale);
+                this.translateService.set(event.data.id, event.data.value.toString(), event.data.locale);
               } else if (this.translocoService) {
-                this.translocoService.setTranslationKey(event.data.id, event.data.value, event.data.locale);
+                this.translocoService.setTranslationKey(event.data.id, event.data.value.toString(), event.data.locale);
               }
               break;
             }
             case DesignModelType.CONFIGURATION: {
+              this.configurationService.set(event.data.id, event.data.value);
               break;
             }
             default: {

@@ -3,7 +3,7 @@ export interface DesignEvent {
   type: DesignModelType;
   id: string;
   locale?: string;
-  value?: string;
+  value?: string | number | boolean;
 }
 
 export enum DesignAction {
