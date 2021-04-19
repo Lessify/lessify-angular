@@ -11,9 +11,7 @@ export class ConfigurationDirective implements OnInit {
   @Input() lessConfig: string;
 
   constructor(
-      private el: ElementRef,
-      private readonly configurationService: ConfigurationService,
-      private readonly cd: ChangeDetectorRef,
+      private el: ElementRef
   ) {
   }
 
