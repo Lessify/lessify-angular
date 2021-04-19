@@ -7,7 +7,7 @@ import {DesignUtil} from '../utils/design.util';
 })
 export class ConfigurationDirective implements OnInit {
 
-  @Input() lessConfig: string;
+  @Input() lessifyConfig: string;
 
   constructor(
       private el: ElementRef
@@ -15,13 +15,13 @@ export class ConfigurationDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (typeof this.lessConfig === undefined) {
+    if (typeof this.lessifyConfig === undefined) {
       return;
     }
     if (DesignUtil.isInIframe()) {
-      this.el.nativeElement.setAttribute('data-lessify-configuration-id', this.lessConfig);
+      this.el.nativeElement.setAttribute('data-lessify-configuration-id', this.lessifyConfig);
       this.el.nativeElement.style.outline = '#23252B dashed';
-      this.el.nativeElement.title = `Configuration: ${this.lessConfig}`;
+      this.el.nativeElement.title = `Configuration: ${this.lessifyConfig}`;
       // this.el.nativeElement.style.outlineOffset = '3px';
     }
   }
@@ -32,7 +32,7 @@ export class ConfigurationDirective implements OnInit {
       window.parent.postMessage({
         action: DesignAction.LINK,
         type: DesignModelType.CONFIGURATION,
-        id: this.lessConfig
+        id: this.lessifyConfig
       } as DesignEvent, '*');
     }
   }
