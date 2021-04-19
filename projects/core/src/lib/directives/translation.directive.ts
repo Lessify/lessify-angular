@@ -9,7 +9,7 @@ import {DesignUtil} from '../utils/design.util';
 })
 export class TranslationDirective implements OnInit {
 
-  @Input() lessTransl: string;
+  @Input() lessifyTransl: string;
 
   constructor(
       private el: ElementRef,
@@ -19,13 +19,13 @@ export class TranslationDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (typeof this.lessTransl === undefined) {
+    if (typeof this.lessifyTransl === undefined) {
       return;
     }
     if (DesignUtil.isInIframe()) {
-      this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessTransl);
+      this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessifyTransl);
       this.el.nativeElement.style.outline = '#003DFF dashed';
-      this.el.nativeElement.title = `Translation: ${this.lessTransl}`;
+      this.el.nativeElement.title = `Translation: ${this.lessifyTransl}`;
       // this.el.nativeElement.style.outlineOffset = '3px';
     }
   }
@@ -37,7 +37,7 @@ export class TranslationDirective implements OnInit {
           {
             action: DesignAction.LINK,
             type: DesignModelType.TRANSLATION,
-            id: this.lessTransl,
+            id: this.lessifyTransl,
             locale: this.getCurrentLanguage()
           } as DesignEvent,
           '*' // window.parent.location.origin
