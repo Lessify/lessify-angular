@@ -1,8 +1,6 @@
 import {NgModule, Optional} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
-import {ConfigurationService} from './services/configuration.service';
-import {TranslationService} from './services/translation.service';
 import {TranslateService} from '@ngx-translate/core';
 import {TranslocoService} from '@ngneat/transloco';
 import {DesignAction, DesignEvent, DesignModelType} from './models/design.model';
@@ -10,6 +8,8 @@ import {DesignUtil} from './utils/design.util';
 import {TranslationDirective} from './directives/translation.directive';
 import {ConfigurationDirective} from './directives/configuration.directive';
 import {Router} from '@angular/router';
+import {LessifyConfigurationService} from './services/configuration.service';
+import {LessifyTranslationService} from './services/translation.service';
 
 const LESSIFY_WINDOW = 'lessify';
 
@@ -25,13 +25,13 @@ const LESSIFY_WINDOW = 'lessify';
     ConfigurationDirective,
   ],
   providers: [
-    ConfigurationService,
-    TranslationService
+    LessifyConfigurationService,
+    LessifyTranslationService
   ]
 })
 export class LessifyCoreModule {
   constructor(
-      private readonly configurationService: ConfigurationService,
+      private readonly configurationService: LessifyConfigurationService,
       @Optional() private readonly translateService: TranslateService,
       @Optional() private readonly translocoService: TranslocoService,
       private readonly router: Router,

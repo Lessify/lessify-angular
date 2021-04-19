@@ -19,12 +19,12 @@ import {
   LESSIFY_CONFIG, LessifyConfig,
   LessifyCoreModule,
   LessifyTranslateHttpLoader,
-  TranslationService
+  LessifyTranslationService
 } from '@lessify/angular-core';
 import {AppComponent} from './app'; 
 
 // AoT requires an exported function for factories
-export function NgxTranslateHttpLoaderFactory(service: TranslationService) {
+export function NgxTranslateHttpLoaderFactory(service: LessifyTranslationService) {
     return new LessifyNgxTranslateHttpLoader(service);
 }
 
@@ -37,7 +37,7 @@ export function NgxTranslateHttpLoaderFactory(service: TranslationService) {
             loader: {
                 provide: TranslateLoader,
                 useFactory: NgxTranslateHttpLoaderFactory,
-                deps: [TranslationService]
+                deps: [LessifyTranslationService]
             },
             defaultLanguage: 'en'
         })
@@ -77,12 +77,12 @@ import {
   LESSIFY_CONFIG, LessifyConfig,
   LessifyCoreModule,
   LessifyTranslocoHttpLoader,
-  TranslationService
+  LessifyTranslationService
 } from '@lessify/angular-core';
 import {TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, TranslocoModule} from '@ngneat/transloco';
 
 // AoT requires an exported function for factories
-export function TranslocoHttpLoaderFactory(service: TranslationService) {
+export function TranslocoHttpLoaderFactory(service: LessifyTranslationService) {
   return new LessifyTranslocoHttpLoader(service);
 }
 
@@ -118,7 +118,7 @@ export function TranslocoHttpLoaderFactory(service: TranslationService) {
         prodMode: false,
       })
     },
-    { provide: TRANSLOCO_LOADER, useFactory: TranslocoHttpLoaderFactory, deps: [TranslationService]}
+    { provide: TRANSLOCO_LOADER, useFactory: TranslocoHttpLoaderFactory, deps: [LessifyTranslationService]}
   ],
   declarations: [
     AppComponent,
@@ -135,7 +135,7 @@ Our Recommendation is to subscribe to configuration changes in your component:
 
 ````ts
 import {Component, OnInit} from '@angular/core';
-import {Configurations, ConfigurationService, TranslationService} from '@lessify/angular-core';
+import {Configurations, LessifyConfigurationService} from '@lessify/angular-core';
 
 @Component({
   selector: 'app-test',
@@ -146,8 +146,7 @@ export class TestComponent implements OnInit {
   configurations: Configurations;
 
   constructor(
-      private readonly translateService: TranslationService,
-      private readonly configurationService: ConfigurationService,
+      private readonly configurationService: LessifyConfigurationService,
   ) {
   }
 

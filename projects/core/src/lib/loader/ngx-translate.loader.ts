@@ -1,10 +1,10 @@
 import {TranslateLoader} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
-import {TranslationService} from '../services/translation.service';
+import {LessifyTranslationService} from '../services/translation.service';
 
 export class LessifyNgxTranslateHttpLoader implements TranslateLoader {
   constructor(
-      private translationService: TranslationService
+      private translationService: LessifyTranslationService
   ) {
   }
 

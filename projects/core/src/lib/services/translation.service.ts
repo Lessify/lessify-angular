@@ -11,7 +11,7 @@ export interface Messages {
 @Injectable({
   providedIn: 'root'
 })
-export class TranslationService extends BaseService {
+export class LessifyTranslationService extends BaseService {
 
   constructor(
       readonly httpClient: HttpClient,

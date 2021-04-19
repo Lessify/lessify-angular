@@ -2,7 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {Configurations, ConfigurationService, TranslationService} from '@lessify/angular-core';
+import {
+  Configurations,
+  LessifyConfigurationService,
+  LessifyTranslationService,
+} from '@lessify/angular-core';
 
 @Component({
   selector: 'app-ngx-translate',
@@ -16,8 +20,8 @@ export class NgxTranslateComponent implements OnInit {
 
   constructor(
       private readonly router: Router,
-      private readonly translateService: TranslationService,
-      private readonly configurationService: ConfigurationService,
+      private readonly translateService: LessifyTranslationService,
+      private readonly configurationService: LessifyConfigurationService,
       private readonly fb: FormBuilder,
       public readonly translate: TranslateService
   ) {

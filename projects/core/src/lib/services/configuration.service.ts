@@ -14,7 +14,7 @@ export type Configuration = string | number | boolean;
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigurationService extends BaseService {
+export class LessifyConfigurationService extends BaseService {
 
   private configurations: Configurations = {};
   private configurationsEvents: BehaviorSubject<Configurations>;

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslocoService} from '@ngneat/transloco';
-import {Configurations, ConfigurationService, TranslationService} from '@lessify/angular-core';
+import {Configurations, LessifyConfigurationService, LessifyTranslationService} from '@lessify/angular-core';
 
 @Component({
   selector: 'app-ngneat-transloco',
@@ -16,8 +16,8 @@ export class NgneatTranslocoComponent implements OnInit {
 
   constructor(
       private readonly router: Router,
-      private readonly translateService: TranslationService,
-      private readonly configurationService: ConfigurationService,
+      private readonly translateService: LessifyTranslationService,
+      private readonly configurationService: LessifyConfigurationService,
       private readonly fb: FormBuilder,
       private readonly service: TranslocoService
   ) {
