@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {BaseService} from './base.service';
-import {LESSIFY_CONFIG, LessifyModuleConfig,} from '../lessify.config';
+import {LESSIFY_CONFIG, LessifyModuleConfig} from '../lessify.config';
 import {tap} from 'rxjs/operators';
 import {LessifyLoggerService} from './logger.service';
 

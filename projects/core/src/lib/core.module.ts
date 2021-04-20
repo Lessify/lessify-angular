@@ -36,7 +36,7 @@ export class LessifyCoreModule {
       @Optional() private readonly translocoService: TranslocoService,
       private readonly logger: LessifyLoggerService,
   ) {
-    this.logger.debug(`LessifyCoreModule : constructor -> ${DesignUtil.isInIframe()} - ${window.location}`);
+    this.logger.debug(`LessifyCoreModule : constructor`);
     if (DesignUtil.isInIframe() && !window[LESSIFY_WINDOW]) {
       window[LESSIFY_WINDOW] = {editor: true};
       this.logger.debug('Start message listener');

@@ -1,5 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {LESSIFY_CONFIG, LessifyModuleConfig} from '../lessify.config';
+import {DesignUtil} from '../utils/design.util';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +67,7 @@ export class LessifyLoggerService {
   debug(message: any): void {
     if (this.isDebugEnabled()) {
       // tslint:disable-next-line:no-console
-      console.info(message);
+      console.info(message, DesignUtil.isInIframe() ? '[In Frame]' : '', window.location.href);
     }
   }
 
