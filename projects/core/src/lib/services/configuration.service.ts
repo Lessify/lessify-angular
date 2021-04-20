@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {BaseService} from './base.service';
@@ -15,7 +15,7 @@ export type Configuration = string | number | boolean;
 @Injectable({
   providedIn: 'root'
 })
-export class LessifyConfigurationService extends BaseService {
+export class LessifyConfigurationService extends BaseService implements OnDestroy {
 
   private configurations: Configurations = {};
   private configurationsEvents: BehaviorSubject<Configurations>;
@@ -34,6 +34,7 @@ export class LessifyConfigurationService extends BaseService {
     this.configsChanges$ = this.configurationsEvents.asObservable();
     this.configChanges$ = this.configurationEvents.asObservable();
     this.sync();
+    this.logger.debug('LessifyConfigurationService : constructor');
   }
 
   get(id: string): Configuration | undefined {
@@ -64,11 +65,12 @@ export class LessifyConfigurationService extends BaseService {
     )
     .subscribe(
         it => this.configurations = it,
-        () => {},
+        () => {
+        },
         () => {
           this.logger.debug(`Configuration Sync completed.`);
         }
-        );
+    );
   }
 
   /**
@@ -88,5 +90,11 @@ export class LessifyConfigurationService extends BaseService {
           headers: this.getHeaders()
         }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.configurationsEvents.unsubscribe();
+    this.configurationEvents.unsubscribe();
+    this.logger.debug('LessifyConfigurationService : ngOnDestroy');
   }
 }

@@ -67,7 +67,7 @@ export class LessifyLoggerService {
   debug(message: any): void {
     if (this.isDebugEnabled()) {
       // tslint:disable-next-line:no-console
-      console.info(message, DesignUtil.isInIframe() ? '[In Frame]' : '', window.location.href);
+      console.info(DesignUtil.isInIframe() ? '[In Frame]' : '', message, window.location.href);
     }
   }
 

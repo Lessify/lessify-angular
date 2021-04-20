@@ -23,11 +23,6 @@ const LESSIFY_WINDOW = 'lessify';
     TranslationDirective,
     ConfigurationDirective,
   ],
-  providers: [
-    LessifyConfigurationService,
-    LessifyTranslationService,
-    LessifyLoggerService
-  ]
 })
 export class LessifyCoreModule {
   constructor(

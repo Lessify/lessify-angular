@@ -3,6 +3,7 @@ import {DesignAction, DesignEvent, DesignModelType} from '../models/design.model
 import {TranslateService} from '@ngx-translate/core';
 import {TranslocoService} from '@ngneat/transloco';
 import {DesignUtil} from '../utils/design.util';
+import {LessifyLoggerService} from '../services/logger.service';
 
 @Directive({
   selector: '[lessifyTransl]'
@@ -14,7 +15,8 @@ export class TranslationDirective implements OnInit {
   constructor(
       private el: ElementRef,
       @Optional() private readonly translateService: TranslateService,
-      @Optional() private readonly translocoService: TranslocoService
+      @Optional() private readonly translocoService: TranslocoService,
+      private readonly logger: LessifyLoggerService,
   ) {
   }
 
@@ -22,6 +24,7 @@ export class TranslationDirective implements OnInit {
     if (typeof this.lessifyTransl === undefined) {
       return;
     }
+    this.logger.debug(`lessifyTransl: ngOnInit = '${this.lessifyTransl}'`);
     if (DesignUtil.isInIframe()) {
       this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessifyTransl);
       this.el.nativeElement.style.outline = '#003DFF dashed';
@@ -32,6 +35,7 @@ export class TranslationDirective implements OnInit {
 
   @HostListener('click')
   onClick(): void {
+    this.logger.debug(`lessifyTransl: click = '${this.lessifyTransl}'`);
     if (DesignUtil.isInIframe()) {
       window.parent.postMessage(
           {
