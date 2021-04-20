@@ -7,8 +7,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {
-  LESSIFY_CONFIG, LessifyConfig,
-  LessifyCoreModule,
+  LESSIFY_CONFIG,
+  LessifyCoreModule, LessifyModuleConfig,
   LessifyNgxTranslateHttpLoader, LessifyTranslationService,
   LessifyTranslocoHttpLoader,
 } from '@lessify/angular-core';
@@ -48,8 +48,9 @@ export function TranslocoHttpLoaderFactory(service: LessifyTranslationService) {
       useValue: {
         spaceId: 'e600fed0-0674-11eb-8ebc-355c3e3200ae',
         environment: 'master',
-        apiKey: 'api-key-Tqcgc-38872940-0d32-11eb-8a0e-61e5b1516e7a-Zlh7j'
-      } as LessifyConfig
+        apiKey: 'api-key-Tqcgc-38872940-0d32-11eb-8a0e-61e5b1516e7a-Zlh7j',
+        logLevel: 'debug'
+      } as LessifyModuleConfig
     },
     {
       provide: TRANSLOCO_CONFIG,

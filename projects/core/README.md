@@ -16,7 +16,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {
-  LESSIFY_CONFIG, LessifyConfig,
+  LESSIFY_CONFIG, LessifyModuleConfig,
   LessifyCoreModule,
   LessifyTranslateHttpLoader,
   LessifyTranslationService
@@ -49,7 +49,7 @@ export function NgxTranslateHttpLoaderFactory(service: LessifyTranslationService
             spaceId: 'your-space-id',
             environment: 'master',
             apiKey: 'your-api-key'
-          } as LessifyConfig
+          } as LessifyModuleConfig
         }
       ],
     bootstrap: [AppComponent]
@@ -74,7 +74,7 @@ import {LoginComponent} from './login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {
-  LESSIFY_CONFIG, LessifyConfig,
+  LESSIFY_CONFIG, LessifyModuleConfig,
   LessifyCoreModule,
   LessifyTranslocoHttpLoader,
   LessifyTranslationService
@@ -102,7 +102,7 @@ export function TranslocoHttpLoaderFactory(service: LessifyTranslationService) {
         spaceId: 'your-space-id',
         environment: 'master',
         apiKey: 'your-api-key'
-      } as LessifyConfig
+      } as LessifyModuleConfig
     },
     {
       provide: TRANSLOCO_CONFIG,

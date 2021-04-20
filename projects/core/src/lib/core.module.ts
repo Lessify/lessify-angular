@@ -7,14 +7,13 @@ import {DesignAction, DesignEvent, DesignModelType} from './models/design.model'
 import {DesignUtil} from './utils/design.util';
 import {TranslationDirective} from './directives/translation.directive';
 import {ConfigurationDirective} from './directives/configuration.directive';
-import {Router} from '@angular/router';
 import {LessifyConfigurationService} from './services/configuration.service';
 import {LessifyTranslationService} from './services/translation.service';
+import {LessifyLoggerService} from './services/logger.service';
 
 const LESSIFY_WINDOW = 'lessify';
 
 @NgModule({
-  id: 'lessify-core',
   declarations: [
     TranslationDirective,
     ConfigurationDirective,
@@ -26,7 +25,8 @@ const LESSIFY_WINDOW = 'lessify';
   ],
   providers: [
     LessifyConfigurationService,
-    LessifyTranslationService
+    LessifyTranslationService,
+    LessifyLoggerService
   ]
 })
 export class LessifyCoreModule {
@@ -34,17 +34,17 @@ export class LessifyCoreModule {
       private readonly configurationService: LessifyConfigurationService,
       @Optional() private readonly translateService: TranslateService,
       @Optional() private readonly translocoService: TranslocoService,
-      private readonly router: Router,
+      private readonly logger: LessifyLoggerService,
   ) {
-    // console.log(`LessifyEditorModule : constructor -> ${this.isInIframe()} - ${window.location}`);
+    this.logger.debug(`LessifyCoreModule : constructor -> ${DesignUtil.isInIframe()} - ${window.location}`);
     if (DesignUtil.isInIframe() && !window[LESSIFY_WINDOW]) {
       window[LESSIFY_WINDOW] = {editor: true};
-      console.log('Start message listener');
+      this.logger.debug('Start message listener');
       window.addEventListener('message', (event: MessageEvent<DesignEvent>) => {
         if (event.origin !== 'https://app.lessify.io' && event.origin !== 'https://dev-app.lessify.io' && event.origin !== 'http://localhost:4200') {
           return;
         }
-        console.log(event);
+        this.logger.debug(event);
         if (event.data.action === DesignAction.UPDATE) {
           switch (event.data.type) {
             case DesignModelType.TRANSLATION: {
@@ -60,13 +60,13 @@ export class LessifyCoreModule {
               break;
             }
             default: {
-              console.log('Unknown data type.');
+              this.logger.warn('Unknown data type.');
             }
           }
         } else if (event.data.action === DesignAction.RELOAD) {
           window.location.reload();
         } else {
-          console.log('Unknown data action.');
+          this.logger.warn('Unknown data action.');
         }
       });
     }

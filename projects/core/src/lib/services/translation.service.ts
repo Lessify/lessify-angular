@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BaseService} from './base.service';
-import {LESSIFY_CONFIG, LessifyConfig} from '../lessify.config';
+import {LESSIFY_CONFIG, LessifyModuleConfig} from '../lessify.config';
 
 export interface Messages {
   [key: string]: string;
@@ -15,7 +15,7 @@ export class LessifyTranslationService extends BaseService {
 
   constructor(
       readonly httpClient: HttpClient,
-      @Inject(LESSIFY_CONFIG) readonly config: LessifyConfig
+      @Inject(LESSIFY_CONFIG) readonly config: LessifyModuleConfig
   ) {
     super(config);
   }

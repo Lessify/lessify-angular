@@ -2,8 +2,9 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {BaseService} from './base.service';
-import {LESSIFY_CONFIG, LessifyConfig} from '../lessify.config';
+import {LESSIFY_CONFIG, LessifyModuleConfig,} from '../lessify.config';
 import {tap} from 'rxjs/operators';
+import {LessifyLoggerService} from './logger.service';
 
 export interface Configurations {
   [key: string]: Configuration;
@@ -19,12 +20,13 @@ export class LessifyConfigurationService extends BaseService {
   private configurations: Configurations = {};
   private configurationsEvents: BehaviorSubject<Configurations>;
   private configurationEvents: Subject<string>;
-  configChanges$: Observable<string>;
   configsChanges$: Observable<Configurations>;
+  configChanges$: Observable<string>;
 
   constructor(
       private readonly httpClient: HttpClient,
-      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyConfig
+      private readonly logger: LessifyLoggerService,
+      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig
   ) {
     super(config);
     this.configurationsEvents = new BehaviorSubject<Configurations>(this.configurations);
@@ -49,6 +51,7 @@ export class LessifyConfigurationService extends BaseService {
     this.configurations[id] = value;
     this.configurationsEvents.next(this.configurations);
     this.configurationEvents.next(id);
+    this.logger.debug(`Updated Configuration '${id}' with value '${value}'.`);
   }
 
   sync(): void {
@@ -59,7 +62,13 @@ export class LessifyConfigurationService extends BaseService {
           this.configurationEvents.next('*');
         })
     )
-    .subscribe(it => this.configurations = it);
+    .subscribe(
+        it => this.configurations = it,
+        () => {},
+        () => {
+          this.logger.debug(`Configuration Sync completed.`);
+        }
+        );
   }
 
   /**
