@@ -1,6 +1,8 @@
 export interface DesignEvent {
   action: DesignAction;
   type: DesignModelType;
+  space: string;
+  environment: string;
   id: string;
   locale?: string;
   value?: string | number | boolean;

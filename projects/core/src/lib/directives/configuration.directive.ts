@@ -1,7 +1,7 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {Directive, ElementRef, HostListener, Inject, Input, OnInit} from '@angular/core';
 import {DesignAction, DesignEvent, DesignModelType} from '../models/design.model';
 import {DesignUtil} from '../utils/design.util';
-import {LessifyLoggerService} from '../services/logger.service';
+import {LESSIFY_CONFIG, LessifyModuleConfig} from '../lessify.config';
 
 @Directive({
   selector: '[lessifyConfig]'
@@ -12,7 +12,7 @@ export class ConfigurationDirective implements OnInit {
 
   constructor(
       private el: ElementRef,
-      private readonly logger: LessifyLoggerService,
+      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig
   ) {
   }
 
@@ -20,7 +20,7 @@ export class ConfigurationDirective implements OnInit {
     if (typeof this.lessifyConfig === undefined) {
       return;
     }
-    this.logger.debug(`lessifyConfig: ngOnInit = '${this.lessifyConfig}'`);
+    // this.logger.debug(`lessifyConfig: ngOnInit = '${this.lessifyConfig}'`);
     if (DesignUtil.isInIframe()) {
       this.el.nativeElement.setAttribute('data-lessify-configuration-id', this.lessifyConfig);
       this.el.nativeElement.style.outline = '#23252B dashed';
@@ -31,13 +31,16 @@ export class ConfigurationDirective implements OnInit {
 
   @HostListener('click')
   onClick(): void {
-    this.logger.debug(`lessifyConfig: click = '${this.lessifyConfig}'`);
+    // this.logger.debug(`lessifyConfig: click = '${this.lessifyConfig}'`);
     if (DesignUtil.isInIframe()) {
-      window.parent.postMessage({
+      const message: DesignEvent = {
         action: DesignAction.LINK,
         type: DesignModelType.CONFIGURATION,
+        space: this.config.spaceId,
+        environment: this.config.environment,
         id: this.lessifyConfig
-      } as DesignEvent, '*');
+      };
+      window.parent.postMessage(message, '*'); // window.parent.location.origin
     }
   }
 }

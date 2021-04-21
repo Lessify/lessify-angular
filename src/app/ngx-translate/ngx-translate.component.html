@@ -11,29 +11,29 @@
     </div>
     <br/>
     <mat-divider></mat-divider>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" lessifyTransl="login.title">
       {{ 'login.title' | translate }}
     </div>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" lessifyTransl="login.email">
       <mat-label>{{ 'login.email' | translate }}</mat-label>
       <input matInput formControlName="username" required>
-      <mat-error>
+      <mat-error lessifyTransl="login.email.error">
         {{ 'login.email.error' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" lessifyTransl="login.password">
       <mat-label>{{ 'login.password' | translate }}</mat-label>
       <input matInput formControlName="password" required>
-      <mat-error>
+      <mat-error lessifyTransl="login.password.error">
         {{ 'login.password.error' | translate }}
       </mat-error>
     </mat-form-field>
     <br/>
     <div class="d-flex justify-content-around">
-      <button mat-raised-button color="primary">{{ 'login.submit' | translate }}</button>
-      <button mat-raised-button color="accent">{{ 'login.reset' | translate }}</button>
+      <button mat-raised-button color="primary" lessifyTransl="login.submit">{{ 'login.submit' | translate }}</button>
+      <button mat-raised-button color="accent" lessifyTransl="login.reset">{{ 'login.reset' | translate }}</button>
     </div>
-    <mat-error *ngIf="loginInvalid">
+    <mat-error *ngIf="loginInvalid" lessifyTransl="login.auth.wrong">
       {{ 'login.auth.wrong' | translate }}
     </mat-error>
     <br/>
@@ -41,9 +41,11 @@
       <button mat-raised-button color="warn" (click)="changeConfig()">Change Maintenance Config</button>
     </div>
     <br/>
-    <div *ngIf="configurations?.maintenance" class="d-flex justify-content-center"
-         style="color: red">
-      {{ 'login.maintenance.message' | translate }}
+    <div lessifyConfig="maintenance">
+      <div *ngIf="configurations?.maintenance" class="d-flex justify-content-center"
+           style="color: red">
+        {{ 'login.maintenance.message' | translate }}
+      </div>
     </div>
   </form>
 </div>

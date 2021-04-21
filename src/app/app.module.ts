@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {
   LESSIFY_CONFIG,
-  LessifyCoreModule, LessifyModuleConfig,
+  LessifyModuleConfig,
   LessifyNgxTranslateHttpLoader, LessifyTranslationService,
   LessifyTranslocoHttpLoader,
 } from '@lessify/angular-core';
@@ -32,7 +32,6 @@ export function TranslocoHttpLoaderFactory(service: LessifyTranslationService) {
     HttpClientModule,
     SharedModule,
     TranslocoModule,
-    LessifyCoreModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

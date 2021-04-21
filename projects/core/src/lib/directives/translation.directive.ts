@@ -1,9 +1,9 @@
-import {Directive, ElementRef, HostListener, Input, OnInit, Optional} from '@angular/core';
+import {Directive, ElementRef, HostListener, Inject, Input, OnInit, Optional} from '@angular/core';
 import {DesignAction, DesignEvent, DesignModelType} from '../models/design.model';
 import {TranslateService} from '@ngx-translate/core';
 import {TranslocoService} from '@ngneat/transloco';
 import {DesignUtil} from '../utils/design.util';
-import {LessifyLoggerService} from '../services/logger.service';
+import {LESSIFY_CONFIG, LessifyModuleConfig} from '../lessify.config';
 
 @Directive({
   selector: '[lessifyTransl]'
@@ -16,7 +16,7 @@ export class TranslationDirective implements OnInit {
       private el: ElementRef,
       @Optional() private readonly translateService: TranslateService,
       @Optional() private readonly translocoService: TranslocoService,
-      private readonly logger: LessifyLoggerService,
+      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig
   ) {
   }
 
@@ -24,7 +24,7 @@ export class TranslationDirective implements OnInit {
     if (typeof this.lessifyTransl === undefined) {
       return;
     }
-    this.logger.debug(`lessifyTransl: ngOnInit = '${this.lessifyTransl}'`);
+    // this.logger.debug(`lessifyTransl: ngOnInit = '${this.lessifyTransl}'`);
     if (DesignUtil.isInIframe()) {
       this.el.nativeElement.setAttribute('data-lessify-translation-id', this.lessifyTransl);
       this.el.nativeElement.style.outline = '#003DFF dashed';
@@ -35,17 +35,17 @@ export class TranslationDirective implements OnInit {
 
   @HostListener('click')
   onClick(): void {
-    this.logger.debug(`lessifyTransl: click = '${this.lessifyTransl}'`);
+    // this.logger.debug(`lessifyTransl: click = '${this.lessifyTransl}'`);
     if (DesignUtil.isInIframe()) {
-      window.parent.postMessage(
-          {
-            action: DesignAction.LINK,
-            type: DesignModelType.TRANSLATION,
-            id: this.lessifyTransl,
-            locale: this.getCurrentLanguage()
-          } as DesignEvent,
-          '*' // window.parent.location.origin
-      );
+      const message: DesignEvent = {
+        action: DesignAction.LINK,
+        type: DesignModelType.TRANSLATION,
+        space: this.config.spaceId,
+        environment: this.config.environment,
+        id: this.lessifyTransl,
+        locale: this.getCurrentLanguage()
+      };
+      window.parent.postMessage(message, '*'); // window.parent.location.origin
     }
   }
 

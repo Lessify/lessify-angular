@@ -1,4 +1,4 @@
-import {NgModule, Optional} from '@angular/core';
+import {Inject, NgModule, Optional} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
@@ -8,8 +8,8 @@ import {DesignUtil} from './utils/design.util';
 import {TranslationDirective} from './directives/translation.directive';
 import {ConfigurationDirective} from './directives/configuration.directive';
 import {LessifyConfigurationService} from './services/configuration.service';
-import {LessifyTranslationService} from './services/translation.service';
 import {LessifyLoggerService} from './services/logger.service';
+import {LESSIFY_CONFIG, LessifyModuleConfig} from './lessify.config';
 
 const LESSIFY_WINDOW = 'lessify';
 
@@ -30,13 +30,20 @@ export class LessifyCoreModule {
       @Optional() private readonly translateService: TranslateService,
       @Optional() private readonly translocoService: TranslocoService,
       private readonly logger: LessifyLoggerService,
+      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig
   ) {
     this.logger.debug(`LessifyCoreModule : constructor`);
+    this.logger.debug(`LessifyCoreModule Config: ${JSON.stringify(config)}`);
     if (DesignUtil.isInIframe() && !window[LESSIFY_WINDOW]) {
       window[LESSIFY_WINDOW] = {editor: true};
       this.logger.debug('Start message listener');
       window.addEventListener('message', (event: MessageEvent<DesignEvent>) => {
-        if (event.origin !== 'https://app.lessify.io' && event.origin !== 'https://dev-app.lessify.io' && event.origin !== 'http://localhost:4200') {
+        // Exclude unknown origins
+        if (!DesignUtil.isOriginTrusted(event.origin)) {
+          return;
+        }
+        // Exclude messages from different space or environment
+        if (event.data.space !== config.spaceId || event.data.environment !== config.environment) {
           return;
         }
         this.logger.debug(event);

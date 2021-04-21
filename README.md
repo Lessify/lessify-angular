@@ -1,6 +1,6 @@
 # LessifyAngular
 
-The detailed article with step by step explanation you can find on [Lessify Docs](https://lessify.io/docs/integration/angular-ngx-translate/)
+The detailed article with step by step explanation you can find on [Lessify Docs](https://lessify.io/docs/integration/angular/)
 
 Integration of Lessify API with Angular Projects.
 
@@ -10,9 +10,8 @@ Support next implementations :
 - Transloco
 - Direct Lessify API
 
-## NPM Publish
-
-`npm init --scope=lessify`
-`npm run build:prod`
-`npm publish --access public dist\core`
-`npm publish --access public dist\tools`
+[comment]: <> (`npm init --scope=lessify`)
+[comment]: <> (`npm run build:core-prod`)
+[comment]: <> (`npm publish --access public dist\core`)
+[comment]: <> (`npm run build:tools-prod`)
+[comment]: <> (`npm publish --access public dist\tools`)

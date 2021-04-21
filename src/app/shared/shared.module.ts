@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {LessifyCoreModule} from '@lessify/angular-core';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatToolbarModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    LessifyCoreModule
   ],
   declarations: [],
   exports: [
@@ -79,7 +81,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatToolbarModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    LessifyCoreModule
   ],
   entryComponents: []
 })

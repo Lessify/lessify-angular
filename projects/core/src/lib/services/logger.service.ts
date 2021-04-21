@@ -19,7 +19,10 @@ export class LessifyLoggerService {
 
   isTraceEnabled(): boolean {
     switch (this.level) {
-      case 'error' || 'warn' || 'info' || 'debug':
+      case 'error':
+      case 'warn':
+      case 'info':
+      case 'debug':
         return false;
       default :
         return true;
@@ -28,7 +31,9 @@ export class LessifyLoggerService {
 
   isDebugEnabled(): boolean {
     switch (this.level) {
-      case 'error' || 'warn' || 'info':
+      case 'error':
+      case 'warn':
+      case 'info':
         return false;
       default :
         return true;
@@ -37,7 +42,8 @@ export class LessifyLoggerService {
 
   isInfoEnabled(): boolean {
     switch (this.level) {
-      case 'error' || 'warn':
+      case 'error':
+      case 'warn':
         return false;
       default :
         return true;
@@ -66,8 +72,13 @@ export class LessifyLoggerService {
 
   debug(message: any): void {
     if (this.isDebugEnabled()) {
-      // tslint:disable-next-line:no-console
-      console.info(DesignUtil.isInIframe() ? '[In Frame]' : '', message, window.location.href);
+      if (DesignUtil.isInIframe()) {
+        // tslint:disable-next-line:no-console
+        console.info('🛸', message, window.location.href);
+      } else {
+        // tslint:disable-next-line:no-console
+        console.info(message, window.location.href);
+      }
     }
   }
 
