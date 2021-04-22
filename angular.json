@@ -33,6 +33,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "deployUrl": "/samples/angular/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

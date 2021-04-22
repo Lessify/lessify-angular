@@ -32,8 +32,7 @@ export class LessifyCoreModule {
       private readonly logger: LessifyLoggerService,
       @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig
   ) {
-    this.logger.debug(`LessifyCoreModule : constructor`);
-    this.logger.debug(`LessifyCoreModule Config: ${JSON.stringify(config)}`);
+    this.logger.debug(`LessifyCoreModule : constructor ${JSON.stringify(config)}`);
     if (DesignUtil.isInIframe() && !window[LESSIFY_WINDOW]) {
       window[LESSIFY_WINDOW] = {editor: true};
       this.logger.debug('Start message listener');

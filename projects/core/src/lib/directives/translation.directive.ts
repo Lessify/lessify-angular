@@ -4,6 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {TranslocoService} from '@ngneat/transloco';
 import {DesignUtil} from '../utils/design.util';
 import {LESSIFY_CONFIG, LessifyModuleConfig} from '../lessify.config';
+import {LessifyLoggerService} from '../services/logger.service';
 
 @Directive({
   selector: '[lessifyTransl]'
@@ -16,7 +17,8 @@ export class TranslationDirective implements OnInit {
       private el: ElementRef,
       @Optional() private readonly translateService: TranslateService,
       @Optional() private readonly translocoService: TranslocoService,
-      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig
+      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig,
+      private readonly logger: LessifyLoggerService
   ) {
   }
 
@@ -35,7 +37,7 @@ export class TranslationDirective implements OnInit {
 
   @HostListener('click')
   onClick(): void {
-    // this.logger.debug(`lessifyTransl: click = '${this.lessifyTransl}'`);
+    this.logger.debug(`lessifyTransl(${this.lessifyTransl}): click`);
     if (DesignUtil.isInIframe()) {
       const message: DesignEvent = {
         action: DesignAction.LINK,
@@ -46,6 +48,7 @@ export class TranslationDirective implements OnInit {
         locale: this.getCurrentLanguage()
       };
       window.parent.postMessage(message, '*'); // window.parent.location.origin
+      this.logger.debug(`lessifyTransl(${this.lessifyTransl}): Send message -> ${JSON.stringify(message)}`);
     }
   }
 

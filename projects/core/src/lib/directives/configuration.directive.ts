@@ -2,6 +2,7 @@ import {Directive, ElementRef, HostListener, Inject, Input, OnInit} from '@angul
 import {DesignAction, DesignEvent, DesignModelType} from '../models/design.model';
 import {DesignUtil} from '../utils/design.util';
 import {LESSIFY_CONFIG, LessifyModuleConfig} from '../lessify.config';
+import {LessifyLoggerService} from '../services/logger.service';
 
 @Directive({
   selector: '[lessifyConfig]'
@@ -12,7 +13,8 @@ export class ConfigurationDirective implements OnInit {
 
   constructor(
       private el: ElementRef,
-      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig
+      @Inject(LESSIFY_CONFIG) protected readonly config: LessifyModuleConfig,
+      private readonly logger: LessifyLoggerService
   ) {
   }
 
@@ -31,7 +33,7 @@ export class ConfigurationDirective implements OnInit {
 
   @HostListener('click')
   onClick(): void {
-    // this.logger.debug(`lessifyConfig: click = '${this.lessifyConfig}'`);
+    this.logger.debug(`lessifyConfig(${this.lessifyConfig}): click`);
     if (DesignUtil.isInIframe()) {
       const message: DesignEvent = {
         action: DesignAction.LINK,
@@ -41,6 +43,7 @@ export class ConfigurationDirective implements OnInit {
         id: this.lessifyConfig
       };
       window.parent.postMessage(message, '*'); // window.parent.location.origin
+      this.logger.debug(`lessifyConfig(${this.lessifyConfig}): Send message -> ${JSON.stringify(message)}`);
     }
   }
 }
