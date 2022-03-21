@@ -2,7 +2,7 @@
   "name": "@lessify/angular-core",
   "description": "",
   "author": "Lessify",
-  "version": "2.0.19",
+  "version": "11.0.0",
   "license": "MIT",
   "homepage": "https://github.com/Lessify/lessify-angular",
   "repository": {
@@ -13,8 +13,8 @@
     "url": "https://github.com/Lessify/lessify-angular/issues"
   },
   "peerDependencies": {
-    "@angular/common": ">=10.0.0",
-    "@angular/core": ">=10.0.0",
+    "@angular/common": ">=11.0.0",
+    "@angular/core": ">=11.0.0",
     "rxjs": ">=6.3.0"
   },
   "optionalDependencies": {
