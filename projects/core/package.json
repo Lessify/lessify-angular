@@ -19,7 +19,7 @@
   },
   "optionalDependencies": {
     "@ngx-translate/core": ">=13.0.0",
-    "@ngneat/transloco": ">=2.20.0"
+    "@ngneat/transloco": ">=3.2.0"
   },
   "main": "karma.conf.js",
   "dependencies": {
