@@ -16,6 +16,11 @@
     "i18n-check": {
       "description": "Check i18n integrity.",
       "factory": "./i18n-check/index"
+    },
+    "set-env": {
+      "description": "Set environment variables.",
+      "factory": "./set-env/index",
+      "schema": "./set-env/schema.json"
     }
   }
 }

@@ -65,6 +65,26 @@ Export all translations in one CSV file.
 
 Import one CSV file into all i18n.
 
+### set-env
+
+`ng g @lessify/angular-tools:set-env`
+
+Read Environment Variables at build time, and store them in a TypeScript file.
+
+| Name              | Description                                   	                | Default value               |
+|-------------------|----------------------------------------------------------------|-----------------------------|
+| path           	  | Where to save the environment variables                        | './src/environments/env.ts' |
+| prefix       	 | Environment variable prefix key, used to keep ony requred one. |                             |
+
+Example of output file
+
+````typescript
+export const env = {
+  "LESS_ENV": "dev",
+  "LESS_NAME": "LESSIFY"
+};
+````
+
 ## Testing
 In your project, link the @lessify/angular-tools we just built:
 

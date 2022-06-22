@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "@lessify/angular-tools/set-env",
+  "title": "Set environment variables",
+  "description": "Set environment variables",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "format": "path",
+      "default": "./src/environments/env.ts",
+      "description": "Path where to create the file with environment variables.",
+      "alias": "p"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix to filtered only required environment variables.",
+      "alias": "pr"
+    }
+
+  },
+  "additionalProperties": false
+}

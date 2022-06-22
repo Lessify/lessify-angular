@@ -1,6 +1,6 @@
 {
   "name": "@lessify/angular-core",
-  "version": "0.1.0",
+  "version": "13.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
@@ -11,6 +11,7 @@
     "build:tools": "ng build tools",
     "build:tools-prod": "ng build tools --configuration production && npm run build:tools-schematics",
     "build:tools-schematics": "npm run build:schematics --prefix ./projects/tools",
+    "test:tools": "npm run build:tools-prod  && jasmine dist/tools/**/*.spec.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
