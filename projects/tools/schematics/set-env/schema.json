@@ -14,8 +14,7 @@
     },
     "prefix": {
       "type": "string",
-      "description": "Prefix to filtered only required environment variables.",
-      "alias": "pr"
+      "description": "Prefix to filtered only required environment variables."
     }
 
   },
