@@ -2,6 +2,10 @@ export interface FileConfiguration {
   cwd: string;
   output: string;
   languages: string[];
+  cloud?: {
+    host: string;
+    space: string;
+  };
 }
 
 export const defaultConfig: FileConfiguration = {

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "@lessify/angular-tools/i18n-localess-sync",
+  "title": "update i18n translations from Localess",
+  "description": "update i18n translations from Localess",
+  "type": "object",
+  "properties": {
+    "host": {
+      "type": "string",
+      "description": "firebase host where API is deployed.",
+      "x-prompt": "What is your host name where you host Localess?",
+      "minLength": 1,
+      "alias": "h"
+    },
+    "space": {
+      "type": "string",
+      "description": "Space ID, you can find it in Spaces section.",
+      "x-prompt": "What is your space id in Localess?",
+      "minLength": 1,
+      "alias": "s"
+    }
+  },
+  "additionalProperties": false
+}

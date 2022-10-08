@@ -10,12 +10,12 @@ describe('Set Environments', () => {
 
   // let appTree: UnitTestTree = new UnitTestTree(new HostTree());
 
-  it('logs', () => {
+  it('update environments', () => {
     schematicRunner.runSchematicAsync('set-env', {prefix: 'USERNAME'}, Tree.empty())
     .subscribe({
       next: tree => {
         expect(tree.exists('./src/environments/env.ts')).toBe(true);
-        console.log(tree.readContent('./src/environments/env.ts'));
+        // console.log(tree.readContent('./src/environments/env.ts'));
       }
     });
   });

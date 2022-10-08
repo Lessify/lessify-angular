@@ -1,6 +1,6 @@
 import {chain, Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
 import {Dictionary, FileConfiguration} from '../models';
-import {readConfig} from '../utils';
+import {readConfig, saveLanguage} from '../utils';
 
 export default function i18nImportCsv(): Rule {
   return chain([
@@ -82,14 +82,6 @@ function readLanguage(tree: Tree, cwd: string, lang: string): Dictionary {
     }
   }
   return i18n;
-}
-
-function saveLanguage(tree: Tree, i18n: any, output: string): void {
-  if (tree.exists(output)) {
-    tree.overwrite(output, JSON.stringify(i18n, null, 2));
-  } else {
-    tree.create(output, JSON.stringify(i18n, null, 2));
-  }
 }
 
 function createIdToPathMap(tree: Tree, context: SchematicContext, config: FileConfiguration): Map<string, string> {

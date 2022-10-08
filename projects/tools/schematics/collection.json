@@ -1,9 +1,9 @@
 {
   "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "i18n-merge": {
-      "description": "Merge i18n json files.",
-      "factory": "./i18n-merge/index"
+    "i18n-check": {
+      "description": "Check i18n integrity.",
+      "factory": "./i18n-check/index"
     },
     "i18n-export-csv": {
       "description": "Export all i18n json files into CSV.",
@@ -13,9 +13,13 @@
       "description": "Import CSV file into all i18n json files.",
       "factory": "./i18n-import-csv/index"
     },
-    "i18n-check": {
-      "description": "Check i18n integrity.",
-      "factory": "./i18n-check/index"
+    "i18n-localess-sync": {
+      "description": "update i18n translations from Localess",
+      "factory": "./i18n-localess-sync/index"
+    },
+    "i18n-merge": {
+      "description": "Merge i18n json files.",
+      "factory": "./i18n-merge/index"
     },
     "set-env": {
       "description": "Set environment variables.",

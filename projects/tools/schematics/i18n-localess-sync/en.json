@@ -1,0 +1,7 @@
+{
+  "shared.main.routeDashboard": "Dashboard",
+  "shared.main.routeSettings": "Settings",
+  "shared.main.routelogout": "Logout",
+  "shared.main.routeSync": "Sync",
+  "shared.main.no-local": "NO_LOCAL"
+}
