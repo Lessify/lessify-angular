@@ -74,6 +74,19 @@ Import one CSV file into all i18n.
 
 ## Localess Cloud Commands
 
+### i18n-localess-diff
+
+`ng g @lessify/angular-tools:i18n-localess-diff`
+
+It will compare values from **Localess** cloud and your local project.
+
+Cloud fields host and space are mandatory.
+
+| Parameter | Alias | Description                                 |
+|-----------|-------|---------------------------------------------|
+| host      | h     | Firebase host where API is deployed.        |
+| space     | s     | Space ID, you can find it in Spaces section |
+
 ### i18n-localess-sync
 
 `ng g @lessify/angular-tools:i18n-localess-sync`

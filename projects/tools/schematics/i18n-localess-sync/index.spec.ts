@@ -14,10 +14,10 @@ describe('Localess Cloud Sync', () => {
 
   // let appTree: UnitTestTree = new UnitTestTree(new HostTree());
 
-  it('logs', async () => {
+  it('sync', async () => {
     const tree = Tree.empty();
-    tree.create('/src/app/i18n/en.json', '{"shared.main.routeDashboard":"Dashboard_OLD","shared.main.routeSettings":"Settings_OLD","global.no":"NO_UPDATES"}');
-    tree.create('/src/app/shared/i18n/en.json', '{"shared.main.routelogout": "Logout_OLD","shared.main.routeSync": "Sync_OLD","shared.no": "NO_UPDATES"}');
+    tree.create('/src/app/i18n/en.json', '{"shared.main.routeDashboard":"Dashboard_OLD","shared.main.routeSettings":"Settings_OLD","global.no":"LOCAL_ONLY"}');
+    tree.create('/src/app/shared/i18n/en.json', '{"shared.main.routelogout": "Logout_OLD","shared.main.routeSync": "Sync_OLD","shared.no": "LOCAL_ONLY"}');
 
     const resultTree = await schematicRunner.runSchematicAsync('i18n-localess-sync', {
       host: 'local',
@@ -28,8 +28,8 @@ describe('Localess Cloud Sync', () => {
     expect(resultTree.files.length).toBe(2);
     // Expect values to be updated
     expect(resultTree.readContent('/src/app/i18n/en.json'))
-    .toBe('{\n  "shared.main.routeDashboard": "Dashboard",\n  "shared.main.routeSettings": "Settings",\n  "global.no": "NO_UPDATES"\n}');
+    .toBe('{\n  "shared.main.routeDashboard": "Dashboard",\n  "shared.main.routeSettings": "Settings",\n  "global.no": "LOCAL_ONLY"\n}');
     expect(resultTree.readContent('/src/app/shared/i18n/en.json'))
-    .toBe('{\n  "shared.main.routelogout": "Logout",\n  "shared.main.routeSync": "Sync",\n  "shared.no": "NO_UPDATES"\n}');
+    .toBe('{\n  "shared.main.routelogout": "Logout",\n  "shared.main.routeSync": "Sync",\n  "shared.no": "LOCAL_ONLY"\n}');
   });
 });

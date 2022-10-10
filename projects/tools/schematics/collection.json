@@ -13,6 +13,10 @@
       "description": "Import CSV file into all i18n json files.",
       "factory": "./i18n-import-csv/index"
     },
+    "i18n-localess-diff": {
+      "description": "Diff i18n translations from Localess",
+      "factory": "./i18n-localess-diff/index"
+    },
     "i18n-localess-sync": {
       "description": "update i18n translations from Localess",
       "factory": "./i18n-localess-sync/index"

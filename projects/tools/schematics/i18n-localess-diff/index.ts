@@ -2,12 +2,18 @@ import {chain, Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
 import {Schema} from './schema';
 import axios from 'axios';
 import {Dictionary, FileConfiguration} from '../models';
-import {extractKeyPath, extractKeyValue, readConfig, readLanguage, updateI18nFile} from '../utils';
+import {extractKeyValue, readConfig} from '../utils';
 import {readFileSync} from 'fs';
 
-const CURRENT_FOLDER = 'projects/tools/schematics/i18n-localess-sync';
+interface DictionaryDifference {
+  key: string;
+  local?: string;
+  cloud?: string;
+}
 
-export default function i18nLocalessSync(options: Schema): Rule {
+const CURRENT_FOLDER = 'projects/tools/schematics/i18n-localess-diff';
+
+export default function i18nLocalessDiff(options: Schema): Rule {
   return chain([
     // Download locales in a temporary folder
     async (tree: Tree, context: SchematicContext) => {
@@ -32,25 +38,34 @@ export default function i18nLocalessSync(options: Schema): Rule {
     (tree: Tree, context: SchematicContext) => {
       const config: FileConfiguration = readConfig(tree);
       for (const lang of config.languages) {
-        context.logger.info(`Collecting local data for '${lang}'...`);
-        const langDic = readLanguage(tree, `${config.output}/tmp`, lang);
-        const langKeyValue = extractKeyValue(tree, config.cwd, lang);
-        const langKeyPath = extractKeyPath(tree, config.cwd, lang);
-        context.logger.info(`Remote Language '${lang}' has ${Object.getOwnPropertyNames(langDic).length} keys`);
-        // console.log(`Remote Language '${lang}' has ${Object.getOwnPropertyNames(langDic).length} keys`);
-        context.logger.info(`Updating local files for '${lang}'...`);
-        for (const langKey of Object.getOwnPropertyNames(langDic)) {
-          const value = langDic[langKey];
-          // console.log(`Language ${lang} '${langKey}'='${value}' => ${langKeyValue.has(langKey)}`);
-          if (langKeyValue.has(langKey) && langKeyValue.get(langKey) !== value) {
-            const path = langKeyPath.get(langKey);
-            context.logger.debug(`Local update '${lang}' with key = '${langKey}' value = '${langDic[langKey]}' in file ${path}`);
-            // console.log(`Local update '${lang}' with key = '${langKey}' value = '${langDic[langKey]}' in file ${path}`);
-            if (path) {
-              updateI18nFile(tree, path, langKey, value);
+        context.logger.info(`Collecting data for '${lang}'...`);
+        const local = extractKeyValue(tree, config.cwd, lang);
+        const remote = extractKeyValue(tree, `${config.output}/tmp`, lang);
+
+        const allKeys = new Set([...remote.keys(), ...local.keys()]);
+        const diff: DictionaryDifference[] = [];
+        allKeys.forEach(key => {
+          const localValue = local.get(key);
+          const cloudValue = remote.get(key);
+          if (localValue && cloudValue) {
+            if (localValue !== cloudValue) {
+              diff.push({
+                key,
+                local: localValue,
+                cloud: cloudValue
+              });
             }
+          } else {
+            diff.push({
+              key,
+              local: localValue,
+              cloud: cloudValue
+            });
           }
-        }
+        });
+        context.logger.info(`Language '${lang}' differences :`);
+        console.log(`Language '${lang}' differences :`);
+        console.table(diff);
       }
     },
     // Clean up temporary folder
