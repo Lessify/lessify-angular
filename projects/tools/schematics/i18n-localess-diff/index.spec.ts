@@ -21,6 +21,7 @@ describe('Localess Cloud Diff', () => {
 
     const resultTree = await schematicRunner.runSchematicAsync('i18n-localess-diff', {
       host: 'local',
+      // host: 'https://snr-business-localess-test.web.app',
       space: 'gatqBNAgcGObgKOJvMKm'
     }, tree)
     .toPromise();
