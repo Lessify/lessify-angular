@@ -1,5 +1,5 @@
 import {Tree} from '@angular-devkit/schematics';
-import {defaultConfig, Dictionary, FileConfiguration} from './models';
+import {defaultConfig, Dictionary, FileConfiguration, ProxyConfig} from './models';
 
 export function readConfig(tree: Tree): FileConfiguration {
   const file = tree.read('lessify.json');
@@ -107,4 +107,25 @@ export function saveLanguage(tree: Tree, i18n: Dictionary, output: string): void
   } else {
     tree.create(output, JSON.stringify(i18n, null, 2));
   }
+}
+
+export function proxy(value: string): ProxyConfig {
+  const url = new URL(value);
+
+  console.log(url);
+
+  let auth;
+  if (url.username && url.password) {
+    auth = {
+      username: url.username,
+      password: url.password
+    };
+  }
+
+  return {
+    host: url.hostname,
+    port: url.port,
+    protocol: url.protocol.replace(':', ''),
+    auth
+  };
 }
