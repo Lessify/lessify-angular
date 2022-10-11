@@ -2,7 +2,7 @@
   "name": "@lessify/angular-tools",
   "description": "",
   "author": "Lessify",
-  "version": "13.2.20",
+  "version": "13.3.0",
   "license": "MIT",
   "homepage": "https://github.com/Lessify/lessify-angular",
   "repository": {
@@ -17,7 +17,7 @@
     "@angular/common": ">=13.0.0",
     "@angular/core": ">=13.0.0",
     "@angular-devkit/schematics": ">=13.0.0",
-    "axios": ">=1.0.0"
+    "axios": ">=0.27.0"
   },
   "main": "karma.conf.js",
   "dependencies": {

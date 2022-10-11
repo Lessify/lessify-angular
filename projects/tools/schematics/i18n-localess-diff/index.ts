@@ -18,7 +18,7 @@ export default function i18nLocalessDiff(options: Schema): Rule {
     // Download locales in a temporary folder
     async (tree: Tree, context: SchematicContext) => {
       const config: FileConfiguration = readConfig(tree);
-      context.logger.info(`Config = ${JSON.stringify(config)}`);
+      // context.logger.info(`Config = ${JSON.stringify(config)}`);
       context.logger.info(`Languages : ${config.languages.join(', ')}`);
       for (const lang of config.languages) {
         const hostUrl = `${options.host}/api/v1/spaces/${options.space}/translations/${lang}.json`;
@@ -64,7 +64,7 @@ export default function i18nLocalessDiff(options: Schema): Rule {
           }
         });
         context.logger.info(`Language '${lang}' differences :`);
-        console.log(`Language '${lang}' differences :`);
+        // console.log(`Language '${lang}' differences :`);
         console.table(diff);
       }
     },
