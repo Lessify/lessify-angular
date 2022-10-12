@@ -2,7 +2,7 @@ import {chain, Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
 import {Schema} from './schema';
 import axios from 'axios';
 import {Dictionary, FileConfiguration} from '../models';
-import {extractKeyValue, readConfig} from '../utils';
+import {extractKeyValue, getProxyConfig, readConfig} from '../utils';
 import {readFileSync} from 'fs';
 
 interface DictionaryDifference {
@@ -28,13 +28,9 @@ export default function i18nLocalessDiff(options: Schema): Rule {
         if (options.host === 'local') {
           content = readFileSync(`${CURRENT_FOLDER}/${lang}.json`);
         } else {
-          // const httpProxy = process.env.npm_config_proxy;
-          // const httpsProxy = process.env.npm_config_https_proxy;
-          //
-          // console.log(proxy(httpProxy || ''));
-          // console.log(proxy(httpsProxy || ''));
-
-          const res = await axios.get<Dictionary>(hostUrl);
+          const res = await axios.get<Dictionary>(hostUrl, {
+            proxy: getProxyConfig()
+          });
           content = JSON.stringify(res.data);
         }
         tree.create(`${config.output}/tmp/${lang}.json`, content);

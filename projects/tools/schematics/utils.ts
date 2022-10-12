@@ -1,5 +1,6 @@
 import {Tree} from '@angular-devkit/schematics';
-import {defaultConfig, Dictionary, FileConfiguration, ProxyConfig} from './models';
+import {defaultConfig, Dictionary, FileConfiguration} from './models';
+import {AxiosProxyConfig} from 'axios';
 
 export function readConfig(tree: Tree): FileConfiguration {
   const file = tree.read('lessify.json');
@@ -109,11 +110,8 @@ export function saveLanguage(tree: Tree, i18n: Dictionary, output: string): void
   }
 }
 
-export function proxy(value: string): ProxyConfig {
+export function proxyConfig(value: string): AxiosProxyConfig {
   const url = new URL(value);
-
-  console.log(url);
-
   let auth;
   if (url.username && url.password) {
     auth = {
@@ -124,8 +122,20 @@ export function proxy(value: string): ProxyConfig {
 
   return {
     host: url.hostname,
-    port: url.port,
+    port: Number.parseInt(url.port, 0),
     protocol: url.protocol.replace(':', ''),
     auth
   };
 }
+
+
+export function getProxyConfig(): AxiosProxyConfig | undefined {
+  // const httpProxy = process.env.npm_config_http_proxy || process.env.npm_config_proxy || undefined;
+  const httpsProxy = process.env.npm_config_https_proxy || process.env.npm_config_proxy || undefined;
+
+  if (httpsProxy) {
+    return proxyConfig(httpsProxy);
+  }
+  return;
+}
+
