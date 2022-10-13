@@ -2,7 +2,7 @@ import {chain, Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
 import {Schema} from './schema';
 import axios from 'axios';
 import {Dictionary, FileConfiguration} from '../models';
-import {extractKeyPath, extractKeyValue, readConfig, readLanguage, updateI18nFile} from '../utils';
+import {extractKeyPath, extractKeyValue, getProxyConfig, readConfig, readLanguage, updateI18nFile} from '../utils';
 import {readFileSync} from 'fs';
 
 const CURRENT_FOLDER = 'projects/tools/schematics/i18n-localess-sync';
@@ -12,7 +12,7 @@ export default function i18nLocalessSync(options: Schema): Rule {
     // Download locales in a temporary folder
     async (tree: Tree, context: SchematicContext) => {
       const config: FileConfiguration = readConfig(tree);
-      context.logger.info(`Config = ${JSON.stringify(config)}`);
+      // context.logger.info(`Config = ${JSON.stringify(config)}`);
       context.logger.info(`Languages : ${config.languages.join(', ')}`);
       for (const lang of config.languages) {
         const hostUrl = `${options.host}/api/v1/spaces/${options.space}/translations/${lang}.json`;
@@ -22,7 +22,9 @@ export default function i18nLocalessSync(options: Schema): Rule {
         if (options.host === 'local') {
           content = readFileSync(`${CURRENT_FOLDER}/${lang}.json`);
         } else {
-          const res = await axios.get<Dictionary>(hostUrl);
+          const res = await axios.get<Dictionary>(hostUrl, {
+            proxy: getProxyConfig()
+          });
           content = JSON.stringify(res.data);
         }
         tree.create(`${config.output}/tmp/${lang}.json`, content);

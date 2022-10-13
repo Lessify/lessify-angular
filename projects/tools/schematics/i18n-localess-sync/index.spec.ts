@@ -20,6 +20,7 @@ describe('Localess Cloud Sync', () => {
     tree.create('/src/app/shared/i18n/en.json', '{"shared.main.routelogout": "Logout_OLD","shared.main.routeSync": "Sync_OLD","shared.no": "LOCAL_ONLY"}');
 
     const resultTree = await schematicRunner.runSchematicAsync('i18n-localess-sync', {
+      // host: 'https://snr-business-localess-test.web.app',
       host: 'local',
       space: 'gatqBNAgcGObgKOJvMKm'
     }, tree)
