@@ -1,5 +1,10 @@
 # Lessify Angular Tools
 
+![npm](https://img.shields.io/npm/dw/@lessify/angular-tools)
+![npm](https://img.shields.io/npm/dm/@lessify/angular-tools)
+![npm](https://img.shields.io/npm/dy/@lessify/angular-tools)
+![npm](https://img.shields.io/npm/dt/@lessify/angular-tools)
+
 Angular command line tool to facilitate application development and build.
 
 ## Install
