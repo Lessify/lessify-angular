@@ -74,6 +74,8 @@ Import one CSV file into all i18n.
 
 ## Localess Cloud Commands
 
+Proxy will be automatically filled from NPM configurations.
+
 ### i18n-localess-diff
 
 `ng g @lessify/angular-tools:i18n-localess-diff`
