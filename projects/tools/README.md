@@ -2,10 +2,10 @@
 
 Angular command line tool to facilitate application development and build.
 
-![npm](https://img.shields.io/npm/dw/@lessify/angular-tools)
-![npm](https://img.shields.io/npm/dm/@lessify/angular-tools)
-![npm](https://img.shields.io/npm/dy/@lessify/angular-tools)
-![npm](https://img.shields.io/npm/dt/@lessify/angular-tools)
+![npm](https://img.shields.io/npm/dw/@lessify/angular-tools?style=for-the-badge)
+![npm](https://img.shields.io/npm/dm/@lessify/angular-tools?style=for-the-badge)
+![npm](https://img.shields.io/npm/dy/@lessify/angular-tools?style=for-the-badge)
+![npm](https://img.shields.io/npm/dt/@lessify/angular-tools?style=for-the-badge)
 
 ## Install
 
@@ -32,6 +32,7 @@ Where we have two sections :
 | cwd                | The current working directory in which to search.      | "./src/app"         |
 | languages          | Project languages.                                     | ["en"]              |
 | output             | Output folder path that will contain all merged value. | "./src/assets/i18n" |
+
 
 ````json
 {
@@ -71,15 +72,20 @@ Export all translations in one CSV file.
 | login.password | Password | Passwort   |
 | login.submit   | Submit   | Einreichen |
 
+
 ### i18n-import-csv
 
 `ng g @lessify/angular-tools:i18n-import-csv`
 
 Import one CSV file into all i18n.
 
+
 ## Localess Cloud Commands
 
+Integration with [Localess](https://github.com/Lessify/localess) application deployd in **Firebase**.
+
 Proxy will be automatically filled from NPM configurations.
+
 
 ### i18n-localess-diff
 
@@ -93,6 +99,7 @@ Cloud fields host and space are mandatory.
 |-----------|-------|---------------------------------------------|
 | host      | h     | Firebase host where API is deployed.        |
 | space     | s     | Space ID, you can find it in Spaces section |
+
 
 ### i18n-localess-sync
 
@@ -109,6 +116,7 @@ Cloud fields host and space are mandatory.
 
 
 ## Environment Commands
+
 
 ### set-env
 
