@@ -2,7 +2,7 @@
   "name": "@lessify/angular-core",
   "description": "",
   "author": "Lessify",
-  "version": "12.0.0",
+  "version": "14.0.0",
   "license": "MIT",
   "homepage": "https://github.com/Lessify/lessify-angular",
   "repository": {
@@ -13,13 +13,13 @@
     "url": "https://github.com/Lessify/lessify-angular/issues"
   },
   "peerDependencies": {
-    "@angular/common": ">=13.0.0",
-    "@angular/core": ">=13.0.0",
+    "@angular/common": ">=14.0.0",
+    "@angular/core": ">=14.0.0",
     "rxjs": ">=6.5.0"
   },
   "optionalDependencies": {
-    "@ngx-translate/core": ">=13.0.0",
-    "@ngneat/transloco": ">=3.2.0"
+    "@ngx-translate/core": ">=14.0.0",
+    "@ngneat/transloco": ">=4.2.0"
   },
   "main": "karma.conf.js",
   "dependencies": {

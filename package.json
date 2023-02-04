@@ -1,6 +1,6 @@
 {
   "name": "@lessify/angular-core",
-  "version": "13.0.0",
+  "version": "14.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
@@ -30,8 +30,8 @@
     "@angular/platform-browser": "^14.2.12",
     "@angular/platform-browser-dynamic": "^14.2.12",
     "@angular/router": "^14.2.12",
-    "@ngneat/transloco": "3.2.0",
-    "@ngx-translate/core": "13.0.0",
+    "@ngneat/transloco": "4.2.2",
+    "@ngx-translate/core": "14.0.0",
     "axios": "^0.27.2",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
