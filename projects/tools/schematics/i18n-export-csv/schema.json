@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "@lessify/angular-tools/i18n-export-csv",
+  "$id": "@lessify/angular-tools/i18n-export-csv",
   "title": "i18n merge options schema",
   "description": "merge i18n files in one",
   "type": "object",

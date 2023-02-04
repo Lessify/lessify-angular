@@ -3,27 +3,33 @@
   "schematics": {
     "i18n-check": {
       "description": "Check i18n integrity.",
-      "factory": "./i18n-check/index"
+      "factory": "./i18n-check/index",
+      "schema": "./i18n-check/schema.json"
     },
     "i18n-export-csv": {
       "description": "Export all i18n json files into CSV.",
-      "factory": "./i18n-export-csv/index"
+      "factory": "./i18n-export-csv/index",
+      "schema": "./i18n-export-csv/schema.json"
     },
     "i18n-import-csv": {
       "description": "Import CSV file into all i18n json files.",
-      "factory": "./i18n-import-csv/index"
+      "factory": "./i18n-import-csv/index",
+      "schema": "./i18n-import-csv/schema.json"
     },
     "i18n-localess-diff": {
       "description": "Diff i18n translations from Localess",
-      "factory": "./i18n-localess-diff/index"
+      "factory": "./i18n-localess-diff/index",
+      "schema": "./i18n-localess-diff/schema.json"
     },
     "i18n-localess-sync": {
       "description": "update i18n translations from Localess",
-      "factory": "./i18n-localess-sync/index"
+      "factory": "./i18n-localess-sync/index",
+      "schema": "./i18n-localess-sync/schema.json"
     },
     "i18n-merge": {
       "description": "Merge i18n json files.",
-      "factory": "./i18n-merge/index"
+      "factory": "./i18n-merge/index",
+      "schema": "./i18n-merge/schema.json"
     },
     "set-env": {
       "description": "Set environment variables.",
