@@ -19,12 +19,11 @@ describe('Localess Cloud Sync', () => {
     tree.create('/src/app/i18n/en.json', '{"shared.main.routeDashboard":"Dashboard_OLD","shared.main.routeSettings":"Settings_OLD","global.no":"LOCAL_ONLY"}');
     tree.create('/src/app/shared/i18n/en.json', '{"shared.main.routelogout": "Logout_OLD","shared.main.routeSync": "Sync_OLD","shared.no": "LOCAL_ONLY"}');
 
-    const resultTree = await schematicRunner.runSchematicAsync('i18n-localess-sync', {
+    const resultTree = await schematicRunner.runSchematic('i18n-localess-sync', {
       // host: 'https://snr-business-localess-test.web.app',
       host: 'local',
       space: 'gatqBNAgcGObgKOJvMKm'
-    }, tree)
-    .toPromise();
+    }, tree);
     // Expect no new files
     expect(resultTree.files.length).toBe(2);
     // Expect values to be updated

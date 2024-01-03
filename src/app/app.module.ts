@@ -6,23 +6,17 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
-import {
-  LESSIFY_CONFIG,
-  LessifyModuleConfig,
-  LessifyNgxTranslateHttpLoader, LessifyTranslationService,
-  LessifyTranslocoHttpLoader,
-} from '@lessify/angular-core';
+import {LESSIFY_CONFIG, LessifyModuleConfig, LessifyNgxTranslateHttpLoader, LessifyTranslationService,} from '@lessify/angular-core';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, TranslocoModule} from '@ngneat/transloco';
+import {TranslocoRootModule} from './transloco-root.module';
 
 // AoT requires an exported function for factories
 export function NgxTranslateHttpLoaderFactory(service: LessifyTranslationService) {
   return new LessifyNgxTranslateHttpLoader(service);
 }
+
 // AoT requires an exported function for factories
-export function TranslocoHttpLoaderFactory(service: LessifyTranslationService) {
-  return new LessifyTranslocoHttpLoader(service);
-}
+
 
 @NgModule({
   imports: [
@@ -31,7 +25,7 @@ export function TranslocoHttpLoaderFactory(service: LessifyTranslationService) {
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    TranslocoModule,
+    TranslocoRootModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -51,21 +45,6 @@ export function TranslocoHttpLoaderFactory(service: LessifyTranslationService) {
         logLevel: 'debug'
       } as LessifyModuleConfig
     },
-    {
-      provide: TRANSLOCO_CONFIG,
-      useValue: translocoConfig({
-        defaultLang: 'en',
-        availableLangs: ['en', 'de'],
-        flatten: {
-          aot: true
-        },
-        // Remove this option if your application
-        // doesn't support changing language in runtime.
-        reRenderOnLangChange: true,
-        prodMode: false,
-      })
-    },
-    { provide: TRANSLOCO_LOADER, useFactory: TranslocoHttpLoaderFactory, deps: [LessifyTranslationService]}
   ],
   declarations: [
     AppComponent,

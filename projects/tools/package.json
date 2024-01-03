@@ -2,7 +2,7 @@
   "name": "@lessify/angular-tools",
   "description": "",
   "author": "Lessify",
-  "version": "14.0.2",
+  "version": "17.0.0",
   "license": "MIT",
   "homepage": "https://github.com/Lessify/lessify-angular",
   "repository": {
@@ -14,9 +14,9 @@
   },
   "schematics": "./schematics/collection.json",
   "peerDependencies": {
-    "@angular/common": ">=14.0.0",
-    "@angular/core": ">=14.0.0",
-    "@angular-devkit/schematics": ">=14.0.0",
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
+    "@angular-devkit/schematics": ">=17.0.0",
     "axios": ">=0.27.0"
   },
   "main": "karma.conf.js",

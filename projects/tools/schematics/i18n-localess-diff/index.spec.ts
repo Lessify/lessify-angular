@@ -19,12 +19,11 @@ describe('Localess Cloud Diff', () => {
     tree.create('/src/app/i18n/en.json', '{"shared.main.routeDashboard":"Dashboard_OLD","shared.main.routeSettings":"Settings","global.no":"LOCAL_ONLY"}');
     tree.create('/src/app/shared/i18n/en.json', '{"shared.main.routelogout": "Logout_OLD","shared.main.routeSync": "Sync","shared.no": "LOCAL_ONLY"}');
 
-    const resultTree = await schematicRunner.runSchematicAsync('i18n-localess-diff', {
+    const resultTree = await schematicRunner.runSchematic('i18n-localess-diff', {
       host: 'local',
       // host: 'https://snr-business-localess-test.web.app',
       space: 'gatqBNAgcGObgKOJvMKm'
-    }, tree)
-    .toPromise();
+    }, tree);
     // Expect no new files
     expect(resultTree.files.length).toBe(2);
   });
