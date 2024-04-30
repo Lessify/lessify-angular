@@ -2,7 +2,7 @@
   "name": "@lessify/angular-tools",
   "description": "",
   "author": "Lessify",
-  "version": "17.3.0",
+  "version": "17.3.1",
   "license": "MIT",
   "homepage": "https://github.com/Lessify/lessify-angular",
   "repository": {
@@ -20,7 +20,9 @@
   },
   "main": "karma.conf.js",
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "proxy-agent": "^6.3.0",
+    "node-fetch": "^2.6.7"
   },
   "scripts": {
     "build:schematics": "tsc -p tsconfig.schematics.json"

@@ -3,5 +3,9 @@
   "dest": "../../dist/tools",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "node-fetch",
+    "proxy-agent"
+  ]
 }
