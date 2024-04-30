@@ -1,9 +1,10 @@
 import {chain, Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
 import {Schema} from './schema';
-import axios from 'axios';
-import {Dictionary, FileConfiguration} from '../models';
-import {extractKeyPath, extractKeyValue, getProxyConfig, readConfig, readLanguage, updateI18nFile} from '../utils';
+import {FileConfiguration} from '../models';
+import {extractKeyPath, extractKeyValue, proxyURIFromEnv, readConfig, readLanguage, updateI18nFile} from '../utils';
 import {readFileSync} from 'fs';
+import {ProxyAgent} from 'proxy-agent';
+import fetch, {RequestInit} from 'node-fetch';
 
 const CURRENT_FOLDER = 'projects/tools/schematics/i18n-localess-sync';
 
@@ -17,15 +18,25 @@ export default function i18nLocalessSync(options: Schema): Rule {
       for (const lang of config.languages) {
         const hostUrl = `${options.host}/api/v1/spaces/${options.space}/translations/${lang}.json`;
         context.logger.info(`Downloading : ${hostUrl}`);
-        let content: string | Buffer;
+        let content: string | Buffer = '{}';
         // handle local tests
         if (options.host === 'local') {
           content = readFileSync(`${CURRENT_FOLDER}/${lang}.json`);
         } else {
-          const res = await axios.get<Dictionary>(hostUrl, {
-            proxy: getProxyConfig()
-          });
-          content = JSON.stringify(res.data);
+          const fetchOptions: RequestInit = {
+            redirect: 'follow'
+          };
+          if (proxyURIFromEnv()) {
+            fetchOptions.agent = new ProxyAgent();
+          }
+          try {
+            const res = await fetch(hostUrl, fetchOptions);
+            if (res.ok) {
+              content = await res.text();
+            }
+          } catch (thrown: any) {
+            context.logger.error(`Downloading error from: ${hostUrl} `);
+          }
         }
         tree.create(`${config.output}/tmp/${lang}.json`, content);
       }
