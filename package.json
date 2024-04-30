@@ -32,10 +32,11 @@
     "@angular/router": "^17.0.8",
     "@ngneat/transloco": "5.0.10",
     "@ngx-translate/core": "15.0.0",
-    "axios": "^0.27.2",
     "rxjs": "^7.4.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.14.2"
+    "zone.js": "~0.11.5",
+    "proxy-agent": "^6.3.0",
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.8",
@@ -45,6 +46,7 @@
     "@types/jasmine": "^3.6.9",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^20.10.6",
+    "@types/node-fetch": "^2.5.12",
     "codelyzer": "^6.0.2",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~5.0.0",

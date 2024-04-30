@@ -16,8 +16,7 @@
   "peerDependencies": {
     "@angular/common": ">=17.0.0",
     "@angular/core": ">=17.0.0",
-    "@angular-devkit/schematics": ">=17.0.0",
-    "axios": ">=0.27.0"
+    "@angular-devkit/schematics": ">=17.0.0"
   },
   "main": "karma.conf.js",
   "dependencies": {
