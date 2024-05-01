@@ -42,6 +42,7 @@ export default function i18nLocalessDiff(options: Schema): Rule {
             }
           } catch (thrown: any) {
             context.logger.error(`Downloading error from: ${hostUrl} `);
+            context.logger.error(thrown);
           }
         }
         tree.create(`${config.output}/tmp/${lang}.json`, content);
